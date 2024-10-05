@@ -12,6 +12,7 @@
  */
 body {
   --bs-light-rgb: var(--matr-navbar-bg-rgb);
+  font-family: 'Open Sans', sans-serif !important; /* Ensure font is applied */
 }
 
 /* Set the alert background on the signin and signup pages. */
@@ -26,3 +27,53 @@ body {
   padding-top: 10px;
   padding-bottom: 20px;
 }
+
+/* LANDING PAGE STYLE CSS */
+body .landing-page-bg {
+  background-color: black !important; 
+  color: white !important;
+  padding-left: 5rem; 
+}
+
+body .landing-page-bg .text-box {
+  padding-left: 5rem; /* Ensure consistent padding */
+}
+
+@media (min-width: 768px) {
+  body .landing-page-bg .text-box {
+    padding-left: 8rem; /* More padding on larger screens */
+  }
+}
+
+/* Custom header title styles */
+body .landing-page-bg .header-title {
+  font-size: 3rem; 
+  font-weight: 600; 
+  margin-bottom: 1rem;
+}
+
+/* Custom paragraph styles */
+body .landing-page-bg p {
+  font-size: 1.25rem; 
+  line-height: 1.6; 
+}
+
+/* Ensure buttons have consistent styles */
+body .landing-page-bg .button-group .btn {
+  font-size: 1.1rem;
+  padding: 0.75rem 2rem;
+  border-radius: 0; /* Remove rounded corners */
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+  body .landing-page-bg .text-box {
+    padding-left: 8rem;
+  }
+}
+
+
+/* END OF LANDING PAGE STYLE CSS */
+
+
+
