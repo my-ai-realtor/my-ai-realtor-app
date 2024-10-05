@@ -7,9 +7,7 @@
   --matr-navbar-bg-rgb: 236, 236, 236;
 }
 
-/* Change bootstrap variable values.
- See https://getbootstrap.com/docs/5.2/customize/css-variables/
- */
+/* Change bootstrap variable values. See https://getbootstrap.com/docs/5.2/customize/css-variables/ */
 body {
   --bs-light-rgb: var(--matr-navbar-bg-rgb);
   font-family: 'Open Sans', sans-serif !important; /* Ensure font is applied */
@@ -30,9 +28,9 @@ body {
 
 /* LANDING PAGE STYLE CSS */
 body .landing-page-bg {
-  background-color: black !important; 
+  background-color: black !important;
   color: white !important;
-  padding-left: 5rem; 
+  padding-left: 5rem;
 }
 
 body .landing-page-bg .text-box {
@@ -47,15 +45,15 @@ body .landing-page-bg .text-box {
 
 /* Custom header title styles */
 body .landing-page-bg .header-title {
-  font-size: 3rem; 
-  font-weight: 600; 
+  font-size: 3rem;
+  font-weight: 600;
   margin-bottom: 1rem;
 }
 
 /* Custom paragraph styles */
 body .landing-page-bg p {
-  font-size: 1.25rem; 
-  line-height: 1.6; 
+  font-size: 1.25rem;
+  line-height: 1.6;
 }
 
 /* Ensure buttons have consistent styles */
@@ -73,3 +71,37 @@ body .landing-page-bg .button-group .btn {
 }
 
 /* END OF LANDING PAGE STYLE CSS */
+
+/* Styles only for the dashboard-page */
+#dashboard-page {
+  height: 100%;
+  overflow: hidden;
+  margin: 0; /* Prevent any unwanted margins */
+}
+
+#dashboard-page .sidebar {
+  background-color: var(--matr-navbar-bg); /* Custom sidebar background */
+  overflow-y: auto; /* Allow sidebar to scroll if too long */
+  height: 100vh; /* Limit sidebar height to viewport */
+}
+
+#dashboard-page .content {
+  overflow-y: auto; /* Allow content to scroll if necessary */
+  height: 100vh; /* Limit content height to viewport */
+}
+
+#dashboard-page .nav-link {
+  background-color: white; /* Ensure links have white background */
+  border-radius: 0; /* Remove any rounded corners */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Add subtle shadow for buttons */
+  color: #000; /* Text color for links */
+  cursor: pointer;
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  text-align: left;
+  font-weight: 500;
+}
+
+#dashboard-page .nav-link:hover {
+  background-color: #f0f0f0; /* Slightly darker background on hover */
+}
