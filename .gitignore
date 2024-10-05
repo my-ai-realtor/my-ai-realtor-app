@@ -1,0 +1,37 @@
+# Editor/IDE specific files
+*.iml
+.idea
+.DS_Store
+.vscode/
+.sublime-project
+.sublime-workspace
+
+# OS-specific files
+.DS_Store
+.AppleDouble
+Thumbs.db
+
+# Node.js modules
+node_modules
+app/node_modules
+
+# Meteor specific
+local/
+
+# Build/Dist files
+/build/
+/dist/
+.tmp/
+
+# Environment variables
+.env
+.env.*
+
+# Log files
+*.log
+logs/
+
+# Deployment files (already included in your file)
+settings.production.json
+app/.deploy/mup.js
+app/.deploy/settings.json
