@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Col, Container, Row, Nav, Button, Offcanvas } from 'react-bootstrap';
+import AIChatBox from '../components/AIChatBox';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Define mock components for different escrow stages with deadlines
@@ -115,6 +116,7 @@ const Dashboard = () => {
           {activeComponent}
         </Col>
       </Row>
+      <AIChatBox />
     </Container>
   );
 };
