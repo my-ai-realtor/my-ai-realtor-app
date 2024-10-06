@@ -20,7 +20,8 @@ const ChatBox = () => {
   // Send the initial message when the chat is opened
   useEffect(() => {
     if (isOpen && !initialMessageSent) {
-      Meteor.call('chatWithAssistant', [], (error, reply) => {
+      // Pass an empty string instead of an array or object
+      Meteor.call('chatRealEstate', '', (error, reply) => {
         if (error) {
           console.error('Error:', error);
         } else {
@@ -31,7 +32,6 @@ const ChatBox = () => {
       });
     }
   }, [isOpen, initialMessageSent]);
-
   const toggleChat = () => {
     setIsOpen(!isOpen);
   };
@@ -44,7 +44,8 @@ const ChatBox = () => {
     setMessages(prevMessages => [...prevMessages, userMessage]);
     setInputValue('');
 
-    Meteor.call('chatWithAssistant', [...messages, userMessage], (error, reply) => {
+    // Send only the trimmedInput to the chatRealEstate method
+    Meteor.call('chatRealEstate', trimmedInput, (error, reply) => {
       if (error) {
         console.error('Error:', error);
       } else {

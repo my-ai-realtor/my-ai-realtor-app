@@ -12,20 +12,17 @@ Meteor.methods({
     const useGPT4 = Meteor.settings.public.featureFlags.enableGPT4;
 
     // Determine which API key and model to use
-    let apiUrl; let apiKey; let
-      modelType;
+    let apiUrl;
+    let apiKey;
+    let modelType;
 
     if (useChatGPT) {
       apiUrl = 'https://api.openai.com/v1/chat/completions';
-      apiKey = Meteor.isProduction
-        ? Meteor.settings.private.openaiApiKey
-        : 'test-openai-api-key'; // Dummy key for development
+      apiKey = Meteor.settings.private.openaiApiKey || 'test-openai-api-key'; // Default to a test key if missing
       modelType = useGPT4 ? 'gpt-4' : 'gpt-3.5-turbo'; // Choose between GPT-3.5 and GPT-4
     } else if (useLLAMA) {
       apiUrl = 'https://api.llama.com/v1/chat/completions'; // Example URL for LLAMA API
-      apiKey = Meteor.isProduction
-        ? Meteor.settings.private.llamaApiKey
-        : 'test-llama-api-key'; // Dummy key for development
+      apiKey = Meteor.settings.private.llamaApiKey || 'test-llama-api-key'; // Default to a test key if missing
       modelType = 'llama-model-id'; // Example model for LLAMA
     } else {
       throw new Meteor.Error('No AI model enabled. Please check feature flags.');
