@@ -17,18 +17,23 @@ Meteor.methods({
 
     if (useChatGPT) {
       apiUrl = 'https://api.openai.com/v1/chat/completions';
-      apiKey = Meteor.settings.private.openaiApiKey || 'test-openai-api-key'; // Use a dummy key for development
-      modelType = 'gpt-3.5-turbo';
+      apiKey = Meteor.isProduction
+        ? Meteor.settings.private.openaiApiKey
+        : 'test-openai-api-key'; // Dummy key for development
+      modelType = useGPT4 ? 'gpt-4' : 'gpt-3.5-turbo'; // Choose between GPT-3.5 and GPT-4
     } else if (useLLAMA) {
       apiUrl = 'https://api.llama.com/v1/chat/completions'; // Example URL for LLAMA API
-      apiKey = Meteor.settings.private.llamaApiKey || 'test-llama-api-key'; // Use a dummy key for development
-      modelType = 'llama-model-id';
-    } else if (useGPT4) {
-      apiUrl = 'https://api.openai.com/v1/chat/completions';
-      apiKey = Meteor.settings.private.openaiApiKey || 'test-gpt4-api-key'; // Use a dummy key for development
-      modelType = 'gpt-4';
+      apiKey = Meteor.isProduction
+        ? Meteor.settings.private.llamaApiKey
+        : 'test-llama-api-key'; // Dummy key for development
+      modelType = 'llama-model-id'; // Example model for LLAMA
     } else {
       throw new Meteor.Error('No AI model enabled. Please check feature flags.');
+    }
+
+    // Ensure the API key exists
+    if (!apiKey) {
+      throw new Meteor.Error('API key not found. Please configure the appropriate API key.');
     }
 
     this.unblock(); // Allows other methods to run while this is still processing
