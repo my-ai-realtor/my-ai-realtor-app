@@ -73,21 +73,41 @@ body .landing-page-bg .button-group .btn {
 /* END OF LANDING PAGE STYLE CSS */
 
 /* Styles only for the dashboard-page */
+/* Styles for the entire dashboard */
 #dashboard-page {
-  height: 100%;
-  overflow: hidden;
-  margin: 0; /* Prevent any unwanted margins */
+  height: 100vh; /* Make sure it takes the full height of the viewport */
+  overflow: hidden; /* Prevent scrolling */
 }
 
+/* Ensure that the chat assistant page takes the full height of the available viewport */
+.chat-assistant-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure the chat box is constrained within the available space */
+.chat-box {
+}
 #dashboard-page .sidebar {
-  background-color: var(--matr-navbar-bg); /* Custom sidebar background */
-  overflow-y: auto; /* Allow sidebar to scroll if too long */
-  height: 100vh; /* Limit sidebar height to viewport */
+  background-color: var(--matr-navbar-bg);
+  overflow-y: auto;
+  height: 100vh; /* Sidebar should take up full viewport height */
 }
 
 #dashboard-page .content {
-  overflow-y: auto; /* Allow content to scroll if necessary */
-  height: 100vh; /* Limit content height to viewport */
+  overflow-y: auto;
+  height: 100vh; /* Content should take up full viewport height */
+  display: flex;
+  flex-direction: column;
+}
+
+.full-page-chat {
+  width: 100%;
+  height: 100vh;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
 }
 
 #dashboard-page .nav-link {

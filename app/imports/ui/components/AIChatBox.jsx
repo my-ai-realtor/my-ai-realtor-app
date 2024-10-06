@@ -1,13 +1,15 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable meteor/no-session */
 /* eslint-disable no-console */
 /* eslint-disable no-alert */
 import React, { useState, useEffect, useRef } from 'react';
 import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session';
 
-// TODO: Remove console logs once AI is integrated smoothly
-
-const ChatBox = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([]);
+// ChatBox component, with fullPage layout option
+const ChatBox = ({ fullPage = false }) => {
+  const [isOpen, setIsOpen] = useState(!fullPage); // Auto-open if fullPage
+  const [messages, setMessages] = useState(Session.get('chatMessages') || []); // Initialize messages from Session or empty array
   const [inputValue, setInputValue] = useState('');
   const [initialMessageSent, setInitialMessageSent] = useState(false);
   const messagesEndRef = useRef(null);
@@ -17,10 +19,14 @@ const ChatBox = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // Send the initial message when the chat is opened
+  // Update Session whenever messages change
+  useEffect(() => {
+    Session.set('chatMessages', messages); // Store messages globally in Session
+  }, [messages]);
+
+  // Send the initial message when the chat is opened (for floating chat only)
   useEffect(() => {
     if (isOpen && !initialMessageSent) {
-      // Pass an empty string instead of an array or object
       Meteor.call('chatRealEstate', '', (error, reply) => {
         if (error) {
           console.error('Error:', error);
@@ -32,6 +38,7 @@ const ChatBox = () => {
       });
     }
   }, [isOpen, initialMessageSent]);
+
   const toggleChat = () => {
     setIsOpen(!isOpen);
   };
@@ -44,7 +51,6 @@ const ChatBox = () => {
     setMessages(prevMessages => [...prevMessages, userMessage]);
     setInputValue('');
 
-    // Send only the trimmedInput to the chatRealEstate method
     Meteor.call('chatRealEstate', trimmedInput, (error, reply) => {
       if (error) {
         console.error('Error:', error);
@@ -61,53 +67,58 @@ const ChatBox = () => {
     }
   };
 
+  // Styles for floating vs fullPage chatbox
+  const chatStyle = fullPage
+    ? { width: '100%', backgroundColor: 'white', position: 'relative' }
+    : {
+      position: 'fixed',
+      bottom: '80px',
+      right: '20px',
+      width: '320px',
+      height: '400px',
+      backgroundColor: 'white',
+      border: '1px solid #ccc',
+      borderRadius: '10px',
+      display: 'flex',
+      flexDirection: 'column',
+    };
+
   return (
     <div>
-      {/* Chat circle button - Always visible */}
-      <button
-        type="button"
-        onClick={toggleChat}
-        style={{
-          position: 'fixed',
-          bottom: '20px',
-          right: '20px',
-          width: '60px',
-          height: '60px',
-          borderRadius: '50%',
-          backgroundColor: isOpen ? '#28a745' : '#007bff', // Change color based on open state
-          color: 'white',
-          border: 'none',
-          fontSize: '30px',
-          cursor: 'pointer',
-        }}
-      >
-        {isOpen ? '✖' : '💬'} {/* Show close icon when open, chat icon when closed */}
-      </button>
-
-      {/* Chat window - Controlled by isOpen */}
-      {isOpen && (
-        <div
+      {/* Chat circle button - only for floating chat */}
+      {!fullPage && (
+        <button
+          type="button"
+          onClick={toggleChat}
           style={{
             position: 'fixed',
-            bottom: '80px',
+            bottom: '20px',
             right: '20px',
-            width: '320px',
-            height: '400px',
-            backgroundColor: 'white',
-            border: '1px solid #ccc',
-            borderRadius: '10px',
-            display: 'flex',
-            flexDirection: 'column',
+            width: '60px',
+            height: '60px',
+            borderRadius: '50%',
+            backgroundColor: isOpen ? '#28a745' : '#007bff',
+            color: 'white',
+            border: 'none',
+            fontSize: '30px',
+            cursor: 'pointer',
           }}
         >
+          {isOpen ? '✖' : '💬'}
+        </button>
+      )}
+
+      {/* Chat window */}
+      {(isOpen || fullPage) && (
+        <div style={chatStyle}>
           {/* Chat header */}
           <div
             style={{
               padding: '10px',
               backgroundColor: '#007bff',
               color: 'white',
-              borderTopLeftRadius: '10px',
-              borderTopRightRadius: '10px',
+              borderTopLeftRadius: fullPage ? '0' : '10px',
+              borderTopRightRadius: fullPage ? '0' : '10px',
               display: 'flex',
               justifyContent: 'space-between',
             }}
@@ -116,13 +127,7 @@ const ChatBox = () => {
           </div>
 
           {/* Messages */}
-          <div
-            style={{
-              flexGrow: 1,
-              padding: '10px',
-              overflowY: 'auto',
-            }}
-          >
+          <div style={{ flexGrow: 1, padding: '10px', overflowY: 'auto' }}>
             {messages.map((message, index) => (
               <div
                 key={index}
@@ -156,12 +161,7 @@ const ChatBox = () => {
               onChange={(e) => setInputValue(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Type a message..."
-              style={{
-                width: '100%',
-                padding: '10px',
-                borderRadius: '5px',
-                border: '1px solid #ccc',
-              }}
+              style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
             />
           </div>
         </div>

@@ -3,6 +3,7 @@ import { Col, Container, Row, Nav, Button, Offcanvas } from 'react-bootstrap';
 import AIChatBox from '../components/AIChatBox';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+// TODO: Fix the auto-scroll issue when opening the chat assistant
 // Define mock components for different escrow stages with deadlines
 const PropertySearch = () => (
   <div>
@@ -32,6 +33,12 @@ const Closing = () => (
   </div>
 );
 
+const Chat = () => (
+  <div>
+    <h2>Chat</h2>
+  </div>
+);
+
 const Dashboard = () => {
   // More realistic dashboard structure for a real estate escrow process
   const dashboardData = {
@@ -40,6 +47,7 @@ const Dashboard = () => {
       { id: 'inspection', label: 'Inspection', component: <Inspection /> },
       { id: 'financing', label: 'Financing', component: <Financing /> },
       { id: 'closing', label: 'Closing', component: <Closing /> },
+      { id: 'chat', label: 'Chat', component: <Chat /> },
     ],
   };
 
@@ -62,7 +70,7 @@ const Dashboard = () => {
   };
 
   return (
-    <Container id="dashboard-page" fluid className="vh-100" style={{ overflow: 'hidden' }}>
+    <Container id="dashboard-page" fluid className="vh-10" style={{ overflow: 'hidden' }}>
       <Row className="h-100">
         {/* Sidebar Toggle Button for mobile */}
         <Button
