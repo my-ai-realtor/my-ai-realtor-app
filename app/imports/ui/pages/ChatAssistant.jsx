@@ -1,8 +1,3 @@
-/* eslint-disable no-shadow */
-/* eslint-disable meteor/no-session */
-/* eslint-disable no-console */
-/* eslint-disable no-alert */
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
@@ -24,8 +19,8 @@ const ChatAssistantPage = () => {
 
   // Send the initial message when the chat is first opened
   useEffect(() => {
-    const initialMessageSent = Session.get('initialMessageSent') || false;
-    if (!initialMessageSent && messages.length === 0) {
+    // Check if the initial message has been sent during this session
+    if (!Session.get('initialMessageSent')) {
       // Send initial message
       Meteor.call('chatRealEstate', '', (error, reply) => {
         if (error) {
@@ -33,6 +28,7 @@ const ChatAssistantPage = () => {
         } else {
           const assistantMessage = { sender: 'assistant', content: reply };
           setMessages(prevMessages => [...prevMessages, assistantMessage]);
+          // Mark the initial message as sent in this session
           Session.set('initialMessageSent', true);
         }
       });

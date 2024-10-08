@@ -11,7 +11,6 @@ const ChatBox = ({ fullPage = false }) => {
   const [isOpen, setIsOpen] = useState(!fullPage); // Auto-open if fullPage
   const [messages, setMessages] = useState(Session.get('chatMessages') || []); // Initialize messages from Session or empty array
   const [inputValue, setInputValue] = useState('');
-  const [initialMessageSent, setInitialMessageSent] = useState(false);
   const messagesEndRef = useRef(null);
 
   // Scroll to the latest message when messages update
@@ -26,18 +25,20 @@ const ChatBox = ({ fullPage = false }) => {
 
   // Send the initial message when the chat is opened (for floating chat only)
   useEffect(() => {
-    if (isOpen && !initialMessageSent) {
+    // Check if the initial message has been sent during this session
+    if (isOpen && !Session.get('initialMessageSent')) {
       Meteor.call('chatRealEstate', '', (error, reply) => {
         if (error) {
           console.error('Error:', error);
         } else {
           const assistantMessage = { sender: 'assistant', content: reply };
           setMessages(prevMessages => [...prevMessages, assistantMessage]);
-          setInitialMessageSent(true);
+          // Mark the initial message as sent in this session
+          Session.set('initialMessageSent', true);
         }
       });
     }
-  }, [isOpen, initialMessageSent]);
+  }, [isOpen]);
 
   const toggleChat = () => {
     setIsOpen(!isOpen);
