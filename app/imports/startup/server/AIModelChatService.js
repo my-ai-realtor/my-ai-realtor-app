@@ -1,67 +1,84 @@
 import { Meteor } from 'meteor/meteor';
-import { HTTP } from 'meteor/http';
 import { check } from 'meteor/check';
+import fetch from 'node-fetch';
+import { HfInference } from '@huggingface/inference';
+
+// Polyfill fetch for Node.js
+global.fetch = fetch;
 
 Meteor.methods({
-  'chatRealEstate'(message) {
+  async 'chatRealEstate'(message, selectedModel) {
+    // Ensure both message and selectedModel are present before performing checks
+    if (!message || !selectedModel) {
+      throw new Meteor.Error('invalid-arguments', 'Message and model must be provided');
+    }
+
     check(message, String);
+    check(selectedModel, String);
 
-    // Get feature flags from settings
-    const useChatGPT = Meteor.settings.public.featureFlags.enableChatGPT;
-    const useLLAMA = Meteor.settings.public.featureFlags.enableLLAMA;
-    const useGPT4 = Meteor.settings.public.featureFlags.enableGPT4;
+    // Determine which model to use
+    if (selectedModel.includes('tiiuae') || selectedModel.includes('meta-llama')) {
+      // Hugging Face API logic
+      const inference = new HfInference(Meteor.settings.private.huggingFaceApiKey);
 
-    // Determine which API key and model to use
-    let apiUrl;
-    let apiKey;
-    let modelType;
-
-    if (useChatGPT) {
-      apiUrl = 'https://api.openai.com/v1/chat/completions';
-      apiKey = Meteor.settings.private.openaiApiKey || 'test-openai-api-key'; // Default to a test key if missing
-      modelType = useGPT4 ? 'gpt-4' : 'gpt-3.5-turbo'; // Choose between GPT-3.5 and GPT-4
-    } else if (useLLAMA) {
-      apiUrl = 'https://api.llama.com/v1/chat/completions'; // Example URL for LLAMA API
-      apiKey = Meteor.settings.private.llamaApiKey || 'test-llama-api-key'; // Default to a test key if missing
-      modelType = 'llama-model-id'; // Example model for LLAMA
+      try {
+        const response = await inference.textGeneration({
+          model: selectedModel,
+          inputs: message,
+          parameters: {
+            max_new_tokens: 500,
+            temperature: 0.7,
+          },
+        });
+        const assistantReply = response.generated_text;
+        return assistantReply.trim();
+      } catch (error) {
+        throw new Meteor.Error('huggingface-api-error', 'Failed to get response from Hugging Face API');
+      }
     } else {
-      throw new Meteor.Error('No AI model enabled. Please check feature flags.');
-    }
+      // OpenAI API logic
+      const apiUrl = 'https://api.openai.com/v1/chat/completions';
+      const apiKey = Meteor.settings.private.openaiApiKey;
 
-    // Ensure the API key exists
-    if (!apiKey) {
-      throw new Meteor.Error('API key not found. Please configure the appropriate API key.');
-    }
+      const data = {
+        model: selectedModel,
+        messages: [
+          {
+            role: 'system',
+            content: 'You are a knowledgeable assistant specialized in real estate. Provide helpful and accurate information about real estate topics.',
+          },
+          {
+            role: 'user',
+            content: message,
+          },
+        ],
+        max_tokens: 1500,
+        temperature: 0.7,
+      };
 
-    this.unblock(); // Allows other methods to run while this is still processing
+      const headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${apiKey}`,
+      };
 
-    try {
-      const response = HTTP.call('POST', apiUrl, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${apiKey}`,
-        },
-        data: {
-          model: modelType,
-          messages: [
-            {
-              role: 'system',
-              content: 'You are a knowledgeable assistant specialized in real estate. Provide helpful and accurate information about real estate topics.',
-            },
-            {
-              role: 'user',
-              content: message,
-            },
-          ],
-          max_tokens: 1500,
-          temperature: 0.7,
-        },
-      });
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: headers,
+          body: JSON.stringify(data),
+        });
 
-      const assistantReply = response.data.choices[0].message.content;
-      return assistantReply;
-    } catch (error) {
-      throw new Meteor.Error('Failed to get response from AI model API');
+        const result = await response.json();
+
+        // Handle API response errors
+        if (!response.ok) {
+          throw new Meteor.Error('openai-api-error', result.error.message || 'Failed to get response from OpenAI API');
+        }
+
+        return result.choices[0].message.content.trim();
+      } catch (error) {
+        throw new Meteor.Error('openai-api-error', 'Failed to get response from OpenAI API');
+      }
     }
   },
 });

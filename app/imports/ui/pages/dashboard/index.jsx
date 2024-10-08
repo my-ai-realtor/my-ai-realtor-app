@@ -1,4 +1,3 @@
-// /imports/ui/pages/home/index.jsx
 import React from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { Col, Container, Row, Nav, Button, Offcanvas } from 'react-bootstrap';
@@ -12,48 +11,47 @@ const Dashboard = () => {
 
   return (
     <Container id="dashboard-page" fluid>
+      {/* Sidebar Toggle Button for mobile */}
+      <Button
+        variant="primary"
+        className="d-md-none mb-3"
+        onClick={() => setShowSidebar(true)}
+      >
+        Open Sidebar
+      </Button>
+
+      {/* Offcanvas Sidebar for mobile view */}
+      <Offcanvas
+        show={showSidebar}
+        onHide={() => setShowSidebar(false)}
+        className="d-md-none"
+      >
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Escrow Process</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <Nav className="flex-column">
+            {dashboardConfig.navItems.map(({ id, label, path }) => (
+              <Nav.Link
+                as={NavLink}
+                key={id}
+                to={`/home/${path}`}
+                className="py-2 px-3 mb-2 bg-white rounded shadow-sm text-dark"
+                onClick={() => setShowSidebar(false)}
+              >
+                {label}
+              </Nav.Link>
+            ))}
+          </Nav>
+        </Offcanvas.Body>
+      </Offcanvas>
+
       <Row className="h-100">
-        {/* Sidebar Toggle Button for mobile */}
-        <Button
-          variant="primary"
-          className="d-md-none mb-3"
-          onClick={() => setShowSidebar(true)}
-        >
-          Open Sidebar
-        </Button>
-
-        {/* Offcanvas Sidebar for mobile view */}
-        <Offcanvas
-          show={showSidebar}
-          onHide={() => setShowSidebar(false)}
-          className="d-md-none"
-        >
-          <Offcanvas.Header closeButton>
-            <Offcanvas.Title>Escrow Process</Offcanvas.Title>
-          </Offcanvas.Header>
-          <Offcanvas.Body>
-            <Nav className="flex-column">
-              {dashboardConfig.navItems.map(({ id, label, path }) => (
-                <Nav.Link
-                  as={NavLink}
-                  key={id}
-                  to={`/home/${path}`}
-                  className="py-2 px-3 mb-2 bg-white rounded shadow-sm text-dark"
-                  onClick={() => setShowSidebar(false)}
-                >
-                  {label}
-                </Nav.Link>
-              ))}
-            </Nav>
-          </Offcanvas.Body>
-        </Offcanvas>
-
         {/* Sidebar for desktop view */}
         <Col
           xs={12}
           md={3}
           className="sidebar bg-light p-3 d-none d-md-block"
-          style={{ width: '250px', overflowY: 'auto', height: '100vh' }}
         >
           <h4 className="mb-4">Escrow Process</h4>
           <Nav className="flex-column">
@@ -75,7 +73,6 @@ const Dashboard = () => {
           xs={12}
           md={9}
           className="content p-4"
-          style={{ overflowY: 'auto', height: '100vh' }}
         >
           {/* Render the matched child route component */}
           <Outlet />

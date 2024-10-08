@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable meteor/no-session */
 /* eslint-disable no-console */
@@ -11,6 +12,8 @@ const ChatBox = ({ fullPage = false }) => {
   const [isOpen, setIsOpen] = useState(!fullPage); // Auto-open if fullPage
   const [messages, setMessages] = useState(Session.get('chatMessages') || []); // Initialize messages from Session or empty array
   const [inputValue, setInputValue] = useState('');
+  const [selectedModel, setSelectedModel] = useState('gpt-3.5-turbo'); // Set your default model here
+  const [initialMessageSent, setInitialMessageSent] = useState(false);
   const messagesEndRef = useRef(null);
 
   // Scroll to the latest message when messages update
@@ -25,20 +28,19 @@ const ChatBox = ({ fullPage = false }) => {
 
   // Send the initial message when the chat is opened (for floating chat only)
   useEffect(() => {
-    // Check if the initial message has been sent during this session
-    if (isOpen && !Session.get('initialMessageSent')) {
-      Meteor.call('chatRealEstate', '', (error, reply) => {
+    if (isOpen && !initialMessageSent) {
+      // Call the method with an empty message and selected model
+      Meteor.call('chatRealEstate', '', selectedModel, (error, reply) => {
         if (error) {
-          console.error('Error:', error);
+          console.error('Error sending initial message:', error);
         } else {
           const assistantMessage = { sender: 'assistant', content: reply };
           setMessages(prevMessages => [...prevMessages, assistantMessage]);
-          // Mark the initial message as sent in this session
-          Session.set('initialMessageSent', true);
+          setInitialMessageSent(true);
         }
       });
     }
-  }, [isOpen]);
+  }, [isOpen, initialMessageSent, selectedModel]);
 
   const toggleChat = () => {
     setIsOpen(!isOpen);
@@ -52,9 +54,10 @@ const ChatBox = ({ fullPage = false }) => {
     setMessages(prevMessages => [...prevMessages, userMessage]);
     setInputValue('');
 
-    Meteor.call('chatRealEstate', trimmedInput, (error, reply) => {
+    // Pass both the message and selected model when sending a message
+    Meteor.call('chatRealEstate', trimmedInput, selectedModel, (error, reply) => {
       if (error) {
-        console.error('Error:', error);
+        console.error('Error sending message:', error);
       } else {
         const assistantMessage = { sender: 'assistant', content: reply };
         setMessages(prevMessages => [...prevMessages, assistantMessage]);
