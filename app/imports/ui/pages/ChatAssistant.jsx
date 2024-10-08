@@ -1,3 +1,5 @@
+/* eslint-disable meteor/no-session */
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
