@@ -20,6 +20,12 @@ import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { dashboardConfig } from '../pages/dashboard/dashboardConfig';
 
+// Create a component that redirects if authenticated
+const LandingOrRedirect = () => {
+  const isLoggedIn = Meteor.userId() !== null;
+  return isLoggedIn ? <Navigate to="/home" replace /> : <Landing />;
+};
+
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
   const { ready } = useTracker(() => {
@@ -28,16 +34,17 @@ const App = () => {
       ready: rdy,
     };
   });
+
   return (
     <Router>
       <div className="d-flex flex-column min-vh-100">
         <NavBar />
         <Routes>
-          <Route exact path="/" element={<Landing />} />
+          <Route path="/" element={<LandingOrRedirect />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
-          <Route path="/home" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+
           {/* Dashboard Parent Route */}
           <Route
             path="/home/*"
@@ -51,13 +58,11 @@ const App = () => {
             {dashboardConfig.navItems.map(({ path, component: Component }) => (
               <Route key={path} path={path} element={<Component />} />
             ))}
-            {/* Default Route for /dashboard */}
+            {/* Default Route for /home */}
             <Route index element={<Navigate to="chat" replace />} />
           </Route>
-          <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
-          <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
-          <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
-          <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListStuffAdmin /></AdminProtectedRoute>} />
+
+          {/* Other Routes */}
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
