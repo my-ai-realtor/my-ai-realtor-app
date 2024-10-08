@@ -33,5 +33,6 @@ logs/
 
 # Deployment files (already included in your file)
 settings.production.json
+settings.ai.json
 app/.deploy/mup.js
 app/.deploy/settings.json

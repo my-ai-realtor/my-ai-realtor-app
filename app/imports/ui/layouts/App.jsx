@@ -6,11 +6,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
-import Dashboard from '../pages/Dashboard';
-import ListStuff from '../pages/ListStuff';
-import ListStuffAdmin from '../pages/ListStuffAdmin';
-import AddStuff from '../pages/AddStuff';
-import EditStuff from '../pages/EditStuff';
+import Dashboard from '../pages/dashboard/index';
 import NotFound from '../pages/NotFound';
 import SignUp from '../pages/SignUp';
 import SignOut from '../pages/SignOut';
@@ -18,29 +14,51 @@ import NavBar from '../components/NavBar';
 import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { dashboardConfig } from '../pages/dashboard/dashboardConfig';
+
+// Create a component that redirects if authenticated
+const LandingOrRedirect = () => {
+  const isLoggedIn = Meteor.userId() !== null;
+  return isLoggedIn ? <Navigate to="/home" replace /> : <Landing />;
+};
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => {
-  const { ready } = useTracker(() => {
+  useTracker(() => {
     const rdy = Roles.subscription.ready();
     return {
       ready: rdy,
     };
   });
+
   return (
     <Router>
       <div className="d-flex flex-column min-vh-100">
         <NavBar />
         <Routes>
-          <Route exact path="/" element={<Landing />} />
+          <Route path="/" element={<LandingOrRedirect />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
-          <Route path="/home" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-          <Route path="/list" element={<ProtectedRoute><ListStuff /></ProtectedRoute>} />
-          <Route path="/add" element={<ProtectedRoute><AddStuff /></ProtectedRoute>} />
-          <Route path="/edit/:_id" element={<ProtectedRoute><EditStuff /></ProtectedRoute>} />
-          <Route path="/admin" element={<AdminProtectedRoute ready={ready}><ListStuffAdmin /></AdminProtectedRoute>} />
+
+          {/* Dashboard Parent Route */}
+          <Route
+            path="/home/*"
+            element={(
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            )}
+          >
+            {/* Nested Routes */}
+            {dashboardConfig.navItems.map(({ path, component: Component }) => (
+              <Route key={path} path={path} element={<Component />} />
+            ))}
+            {/* Default Route for /home */}
+            <Route index element={<Navigate to="chat" replace />} />
+          </Route>
+
+          {/* Other Routes */}
           <Route path="/notauthorized" element={<NotAuthorized />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
