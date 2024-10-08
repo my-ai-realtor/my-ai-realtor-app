@@ -72,56 +72,80 @@ body .landing-page-bg .button-group .btn {
 
 /* END OF LANDING PAGE STYLE CSS */
 
-/* Styles only for the dashboard-page */
-/* Styles for the entire dashboard */
+/* Dashboard Styles */
+/* Dashboard Styles */
 #dashboard-page {
-  height: 100vh; /* Make sure it takes the full height of the viewport */
-  overflow: hidden; /* Prevent scrolling */
-}
-
-/* Ensure that the chat assistant page takes the full height of the available viewport */
-.chat-assistant-page {
-  height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-/* Ensure the chat box is constrained within the available space */
-.chat-box {
-}
 #dashboard-page .sidebar {
-  background-color: var(--matr-navbar-bg);
+  width: 250px;
+  flex-shrink: 0;
   overflow-y: auto;
-  height: 100vh; /* Sidebar should take up full viewport height */
+  height: 100vh;
 }
 
 #dashboard-page .content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
-  height: 100vh; /* Content should take up full viewport height */
-  display: flex;
-  flex-direction: column;
-}
-
-.full-page-chat {
-  width: 100%;
+  overflow-x: hidden;
   height: 100vh;
-  background-color: white;
+}
+/* Chat Assistant Styles */
+.chat-assistant-page {
   display: flex;
   flex-direction: column;
+  height: 100%;
+  width: 100%;
 }
 
-#dashboard-page .nav-link {
-  background-color: white; /* Ensure links have white background */
-  border-radius: 0; /* Remove any rounded corners */
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Add subtle shadow for buttons */
-  color: #000; /* Text color for links */
-  cursor: pointer;
-  margin-bottom: 10px;
-  padding: 10px 15px;
+.chat-messages {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #ffffff;
+}
+
+.chat-input {
+  padding: 10px;
+  border-top: 1px solid #eaeaea;
+  background-color: #ffffff;
+}
+
+.chat-input input {
+  width: 100%;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Message styles */
+.chat-message {
+  margin-bottom: 20px;
+}
+
+.chat-message.user {
+  text-align: right;
+}
+
+.chat-message.assistant {
   text-align: left;
-  font-weight: 500;
 }
 
-#dashboard-page .nav-link:hover {
-  background-color: #f0f0f0; /* Slightly darker background on hover */
+.chat-message div {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 20px;
+  max-width: 60%;
+  word-wrap: break-word;
+  background-color: #f1f0f0;
+  color: black;
+}
+
+.chat-message.user div {
+  background-color: #007bff;
+  color: white;
 }
