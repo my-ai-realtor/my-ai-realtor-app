@@ -73,7 +73,6 @@ body .landing-page-bg .button-group .btn {
 /* END OF LANDING PAGE STYLE CSS */
 
 /* Dashboard Styles */
-/* Dashboard Styles */
 #dashboard-page {
   display: flex;
   flex-direction: column;
@@ -94,32 +93,39 @@ body .landing-page-bg .button-group .btn {
   overflow-x: hidden;
   height: 100vh;
 }
+
 /* Chat Assistant Styles */
 .chat-assistant-page {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100vh; /* Full viewport height */
   width: 100%;
 }
 
 .chat-messages {
   flex-grow: 1;
+  overflow-y: auto; /* Enable scrolling even with few messages */
   padding: 20px;
-  overflow-y: auto;
   background-color: #ffffff;
+  max-height: calc(100vh - 150px); /* Adjust the height dynamically */
+  min-height: 200px; /* Ensures there's always space to scroll */
 }
 
 .chat-input {
-  padding: 10px;
+  padding: 20px; /* Increase padding for larger input area */
   border-top: 1px solid #eaeaea;
   background-color: #ffffff;
+  position: relative;
+  height: 80px; /* Increase height for better visibility */
 }
 
 .chat-input input {
   width: 100%;
+  height: 100%; /* Make the input take up the full height of the container */
   padding: 15px;
   border-radius: 5px;
   border: 1px solid #ccc;
+  font-size: 16px; /* Increase font size for better readability */
 }
 
 /* Message styles */
@@ -130,6 +136,26 @@ body .landing-page-bg .button-group .btn {
 .chat-message.user {
   text-align: right;
 }
+
+.chat-message.assistant {
+  text-align: left;
+}
+
+.chat-message div {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 20px;
+  max-width: 60%;
+  word-wrap: break-word;
+  background-color: #f1f0f0;
+  color: black;
+}
+
+.chat-message.user div {
+  background-color: #007bff;
+  color: white;
+}
+
 
 .chat-message.assistant {
   text-align: left;
