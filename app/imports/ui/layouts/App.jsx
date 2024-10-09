@@ -51,9 +51,9 @@ const App = () => {
             )}
           >
             {/* Nested Routes */}
-            {dashboardConfig.navItems.map(({ path, component: Component }) => (
-              <Route key={path} path={path} element={<Component />} />
-            ))}
+            {dashboardConfig.sections.map((section) => section.navItems.map(({ id, path, component: Component }) => (
+              <Route key={id} path={path} element={<Component />} />
+            )))}
             {/* Default Route for /home */}
             <Route index element={<Navigate to="chat" replace />} />
           </Route>

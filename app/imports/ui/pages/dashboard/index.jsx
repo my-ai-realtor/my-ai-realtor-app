@@ -1,3 +1,4 @@
+// /imports/ui/pages/dashboard/Dashboard.js
 import React from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { Col, Container, Row, Nav, Button, Offcanvas } from 'react-bootstrap';
@@ -27,20 +28,25 @@ const Dashboard = () => {
         className="d-md-none"
       >
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Escrow Process</Offcanvas.Title>
+          <Offcanvas.Title>Menu</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <Nav className="flex-column">
-            {dashboardConfig.navItems.map(({ id, label, path }) => (
-              <Nav.Link
-                as={NavLink}
-                key={id}
-                to={`/home/${path}`}
-                className="py-2 px-3 mb-2 bg-white rounded shadow-sm text-dark"
-                onClick={() => setShowSidebar(false)}
-              >
-                {label}
-              </Nav.Link>
+            {dashboardConfig.sections.map((section) => (
+              <React.Fragment key={section.id}>
+                <h4>{section.title}</h4>
+                {section.navItems.map(({ id, label, path }) => (
+                  <Nav.Link
+                    as={NavLink}
+                    key={id}
+                    to={`/home/${path}`}
+                    className="py-2 px-3 mb-2 bg-white rounded shadow-sm text-dark"
+                    onClick={() => setShowSidebar(false)}
+                  >
+                    {label}
+                  </Nav.Link>
+                ))}
+              </React.Fragment>
             ))}
           </Nav>
         </Offcanvas.Body>
@@ -53,19 +59,23 @@ const Dashboard = () => {
           md={3}
           className="sidebar bg-light p-3 d-none d-md-block"
         >
-          <h4 className="mb-4">Escrow Process</h4>
-          <Nav className="flex-column">
-            {dashboardConfig.navItems.map(({ id, label, path }) => (
-              <Nav.Link
-                as={NavLink}
-                key={id}
-                to={`/home/${path}`}
-                className="py-2 px-3 mb-2 bg-white rounded shadow-sm text-dark"
-              >
-                {label}
-              </Nav.Link>
-            ))}
-          </Nav>
+          {dashboardConfig.sections.map((section) => (
+            <React.Fragment key={section.id}>
+              <h4 className="mb-4">{section.title}</h4>
+              <Nav className="flex-column mb-3">
+                {section.navItems.map(({ id, label, path }) => (
+                  <Nav.Link
+                    as={NavLink}
+                    key={id}
+                    to={`/home/${path}`}
+                    className="py-2 px-3 mb-2 bg-white rounded shadow-sm text-dark"
+                  >
+                    {label}
+                  </Nav.Link>
+                ))}
+              </Nav>
+            </React.Fragment>
+          ))}
         </Col>
 
         {/* Main Content Area */}
