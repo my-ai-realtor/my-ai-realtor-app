@@ -1,6 +1,7 @@
 // /imports/ui/pages/dashboard/dashboardConfig.js
 import Chat from './Chat';
 import _Blank from './_Blank';
+import _Data from './_Data';
 
 export const dashboardConfig = {
   sections: [
@@ -20,8 +21,8 @@ export const dashboardConfig = {
       id: 'techDemo',
       title: 'Tech Demo',
       navItems: [
-        { id: 'chat', label: 'Chat', path: 'chat', component: Chat },
-        { id: 'data', label: 'Data', path: 'data', component: _Blank },
+        { id: 'chat', label: 'AI Chat', path: 'chat', component: Chat },
+        { id: 'data-viz', label: 'Data Viz', path: 'data-viz', component: _Data },
       ],
     },
   ],
