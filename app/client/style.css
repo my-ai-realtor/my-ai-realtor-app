@@ -186,7 +186,7 @@ footer .text-center {
   color: black;
   padding: 0.5rem 1rem;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 0;
   transition: background-color 0.3s, color 0.3s;
 }
 
