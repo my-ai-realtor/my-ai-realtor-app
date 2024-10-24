@@ -21,7 +21,7 @@ const Footer = () => (
         <div className="footer-logo mb-3">
           <img src="/path-to-your-logo" alt="Logo" width="50" /> 
         </div>
-        <p>© 2022 ABC. All Rights Reserved.</p>
+        <p>© 2024 ABC. All Rights Reserved.</p>
       </Col>
     </Row>
   </footer>
