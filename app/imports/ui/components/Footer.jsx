@@ -19,7 +19,7 @@ const Footer = () => (
     <Row className="text-center mt-4">
       <Col>
         <div className="footer-logo mb-3">
-          <img src="/path-to-your-logo" alt="Logo" width="50" /> 
+          <img src="/path-to-your-logo" alt="Logo" width="50"/>
         </div>
         <p>© 2024 ABC. All Rights Reserved.</p>
       </Col>
