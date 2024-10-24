@@ -132,6 +132,71 @@ body .landing-page-bg .button-group .btn {
 
 /* END OF LANDING PAGE STYLE CSS */
 
+/* START OF FOOTER STYLE CSS */
+
+footer {
+  background-color: #f8f9fa; /* Light background */
+  padding: 50px 0; /* Space around the footer */
+  border-top: 1px solid #e7e7e7; /* Optional top border */
+}
+
+footer h3 {
+  font-size: 1.8rem; /* Adjust the size for the title */
+  font-weight: 700; /* Bold title */
+  margin-bottom: 20px; /* Space between title and text */
+}
+
+footer p {
+  font-size: 1rem; /* Paragraph text size */
+  color: #6c757d; /* Muted color for the text */
+}
+
+footer a {
+  color: #007bff; /* Link color */
+  text-decoration: none; /* Remove underline */
+  font-size: 0.9rem; /* Adjust link font size */
+}
+
+footer a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+footer .footer-logo img {
+  max-width: 100px; /* Adjust logo size */
+}
+
+footer .social-icons a {
+  font-size: 1.5rem; /* Icon size */
+  color: #495057; /* Icon color */
+  margin: 0 10px; /* Spacing between icons */
+}
+
+footer .social-icons a:hover {
+  color: #007bff; /* Icon color on hover */
+}
+
+footer .text-center {
+  text-align: center; /* Ensures text and icons are centered */
+} 
+
+/* Footer link button styles */
+.footer-link-button {
+  display: inline-block;
+  background-color: rgb(208, 208, 208);
+  color: black;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 0;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.footer-link-button:hover {
+  background-color: black;
+  color: white;
+}
+
+
+
 /* Dashboard Styles */
 #dashboard-page {
   display: flex;
