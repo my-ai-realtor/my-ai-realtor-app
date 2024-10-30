@@ -1,29 +1,32 @@
 import React from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Container, Col, Row, Image } from 'react-bootstrap';
 
 const Footer = () => (
   <footer className="footer-container">
-    <Row className="text-center">
-      <Col>
-        <h3>My AI Realtor</h3>
-        <p>Hello, we are ABC. Trying to make an effort to put the right people for you to get the best results. Just insight.</p>
-      </Col>
-    </Row>
-    <Row className="text-center">
-      <Col>
-        <a href="/terms" className="footer-link-button mx-2">Terms of Service</a>
-        <a href="/about" className="footer-link-button mx-2">About Us</a>
-        <a href="/faqs" className="footer-link-button mx-2">FAQs</a>
-      </Col>
-    </Row>
-    <Row className="text-center mt-4">
-      <Col>
-        <div className="footer-logo mb-3">
-          <img src="/path-to-your-logo" alt="Logo" width="50" />
-        </div>
-        <p>© 2024 ABC. All Rights Reserved.</p>
-      </Col>
-    </Row>
+    <Container>
+      <Row className="text-center mt-4">
+        <Col className="d-flex align-items-center justify-content-center">
+          <Image 
+            src="https://cdn.discordapp.com/attachments/1278527340523159609/1300589784070094920/My_ai_realtor.png?ex=6722b5a0&is=67216420&hm=c4ad2f556e4af404832a9ef643d73e2b167442daf97f52531bf1aaf7170e15fc&" 
+            alt="My AI Realtor logo" 
+            id="Logo" 
+            style={{ width: '200px', height: 'auto' }} 
+          />
+        </Col>
+      </Row>
+      <Row className="text-center mt-3">
+        <Col>
+          <a href="/terms" className="footer-link-button mx-2">Terms of Service</a>
+          <a href="/about" className="footer-link-button mx-2">About Us</a>
+          <a href="/faqs" className="footer-link-button mx-2">FAQs</a> 
+        </Col>
+      </Row>
+      <Row className="text-center mt-3">
+        <Col>
+          <p>© 2024 MyAIRealtor. All Rights Reserved.</p>
+        </Col>
+      </Row>
+    </Container>
   </footer>
 );
 
