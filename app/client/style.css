@@ -200,7 +200,56 @@ footer .text-center {
   color: white;
 }
 
+/* END OF FOOTER STYLE */
 
+/* START OF GETTING STARTED STYLING */
+
+.getting-started-container {
+  background-color: #f9fafb;
+  color: #333;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.getting-started-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #343a40;
+  margin-bottom: 0.5rem;
+}
+
+.getting-started-subtitle {
+  font-size: 1.25rem;
+  color: #6c757d;
+  margin-bottom: 2rem;
+}
+
+.getting-started-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.getting-started-list-item {
+  margin-bottom: 1rem;
+}
+
+.getting-started-link {
+  color: #007bff;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.getting-started-link:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+/* END OF GETTING STARTED STYLING */
 
 /* Dashboard Styles */
 #dashboard-page {

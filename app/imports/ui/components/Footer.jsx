@@ -7,7 +7,7 @@ const Footer = () => (
       <Row className="text-center mt-4">
         <Col className="d-flex align-items-center justify-content-center">
           <Image
-            src="https://cdn.discordapp.com/attachments/1278527340523159609/1300590236551876761/My_ai_realtor_processed.png?ex=6722b60c&is=6721648c&hm=5359ccd562914bccf59211713097624054a7063b09abf6374c56244f57a81efa&"
+            src="https://media.discordapp.net/attachments/1278527340523159609/1300590236551876761/My_ai_realtor_processed.png?ex=6726aa8c&is=6725590c&hm=7cd918f076fc0910029d7c5a982a9bdb86b8ef6e472e729aee593d3b9ff52fb3&=&format=webp&quality=lossless"
             alt="My AI Realtor logo"
             id="Logo"
             style={{ width: '200px', height: 'auto' }}
