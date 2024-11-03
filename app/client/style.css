@@ -354,3 +354,34 @@ footer .text-center {
   background-color: #007bff;
   color: white;
 }
+/* Terms of Service Styles */
+.terms-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+.terms-title {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.terms-subtitle {
+  font-size: 1.5em;
+  margin-top: 20px;
+  color: #444;
+}
+
+.terms-section {
+  margin-bottom: 20px;
+}
+
+.terms-text {
+  font-size: 1em;
+  color: #555;
+  margin-bottom: 15px;
+}
