@@ -14,6 +14,8 @@ import NavBar from '../components/NavBar';
 import SignIn from '../pages/SignIn';
 import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
+import GettingStarted from '../pages/GettingStarted';
+import Terms from '../pages/Terms';
 import { dashboardConfig } from '../pages/dashboard/dashboardConfig';
 
 // Create a component that redirects if authenticated
@@ -40,6 +42,8 @@ const App = () => {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
+          <Route path="/getting-started" element={<GettingStarted />} />
+          <Route path="/terms" element={<Terms />} />
 
           {/* Dashboard Parent Route */}
           <Route

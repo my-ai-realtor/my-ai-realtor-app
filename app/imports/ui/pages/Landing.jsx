@@ -1,5 +1,6 @@
 import React from 'react';
 import { Col, Container, Row, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const Landing = () => (
   <Container id="landing-page" fluid className="landing-page-bg vh-100">
@@ -8,7 +9,9 @@ const Landing = () => (
         <h1 className="header-title">My AI Realtor</h1>
         <p>Discover a seamless home-buying experience with our AI-powered assistant. From finding the perfect property to closing the deal, we&apos;re here to support you every step of the way.</p>
         <div className="button-group mt-3"> {/* Add margin-top for space between text and buttons */}
-          <Button variant="light">Get Started</Button>
+          <Link to="/getting-started">
+            <Button variant="light">Get Started</Button>
+          </Link>
           <Button variant="outline-light" className="mx-2">Learn More</Button>
         </div>
       </Col>
