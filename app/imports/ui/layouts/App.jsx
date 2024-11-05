@@ -12,6 +12,8 @@ import SignUp from '../pages/SignUp';
 import SignOut from '../pages/SignOut';
 import NavBar from '../components/NavBar';
 import SignIn from '../pages/SignIn';
+import LearnMore from '../pages/LearnMore';
+import ContactUs from '../pages/ContactUs';
 import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
 import GettingStarted from '../pages/GettingStarted';
@@ -44,6 +46,8 @@ const App = () => {
           <Route path="/signout" element={<SignOut />} />
           <Route path="/getting-started" element={<GettingStarted />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path="/learnmore" element={<LearnMore />} />
+          <Route path="/contactus" element={<ContactUs />} />
 
           {/* Dashboard Parent Route */}
           <Route

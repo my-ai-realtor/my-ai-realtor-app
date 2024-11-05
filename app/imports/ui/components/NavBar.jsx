@@ -21,8 +21,8 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="justify-content-end" style={{ width: '100%' }}>
-            <Nav.Link id="add-stuff-nav" as={NavLink} to="/add" key="add">Learn More</Nav.Link>
-            <Nav.Link id="add-stuff-nav" as={NavLink} to="/add" key="add">Contact Us</Nav.Link>
+            <Nav.Link id="learn-more-nav" as={NavLink} to="/learnmore" key="add">Learn More</Nav.Link>
+            <Nav.Link id="contact-us-nav" as={NavLink} to="/contactus" key="add">Contact Us</Nav.Link>
           </Nav>
           <Nav className="me-auto justify-content-start">
 
