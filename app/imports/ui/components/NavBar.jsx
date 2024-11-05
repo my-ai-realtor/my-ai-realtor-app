@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { NavLink } from 'react-router-dom';
 import { Roles } from 'meteor/alanning:roles';
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Container, Nav, Navbar, NavDropdown, Image } from 'react-bootstrap';
 import { BoxArrowRight, PersonFill, PersonPlusFill } from 'react-bootstrap-icons';
 
 const NavBar = () => {
@@ -16,13 +16,19 @@ const NavBar = () => {
     <Navbar bg="light" expand="lg">
       <Container>
         <Navbar.Brand as={NavLink} to="/">
-          <h2>My AI Realtor</h2>
+          <Image src="/images/my-ai-realtor-logo_1-removebg.png" fluid width="20%" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="justify-content-end" style={{ width: '100%' }}>
-            <Nav.Link id="learn-more-nav" as={NavLink} to="/learnmore" key="add">Learn More</Nav.Link>
-            <Nav.Link id="contact-us-nav" as={NavLink} to="/contactus" key="add">Contact Us</Nav.Link>
+            {/* Conditionally render "Home" link based on user login status */}
+            {currentUser !== '' && (
+              <Nav.Link id="home-nav" as={NavLink} to="/" key="0">
+                Home
+              </Nav.Link>
+            )}
+            <Nav.Link id="learn-more-nav" as={NavLink} to="/learnmore" key="1">Learn More</Nav.Link>
+            <Nav.Link id="contact-us-nav" as={NavLink} to="/contactus" key="2">Contact Us</Nav.Link>
           </Nav>
           <Nav className="me-auto justify-content-start">
 
