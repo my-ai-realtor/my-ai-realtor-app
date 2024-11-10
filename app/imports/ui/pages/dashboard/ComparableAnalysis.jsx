@@ -1,7 +1,7 @@
 // /imports/ui/pages/dashboard/ComparableAnalysis.jsx
 import React, { useState } from 'react';
 
-const ComparableAnalysis = () => {
+const ComparableAnalysisPage = () => {
   const [addresses, setAddresses] = useState([
     { id: 1, address: '', showPrice: false, price: null },
   ]);
@@ -15,9 +15,8 @@ const ComparableAnalysis = () => {
     setAddresses(addresses.map(address => (address.id === id ? { ...address, address: value } : address)));
   };
 
-  const generateRandomPrice = () =>
-    // Generate a random price between $100,000 and $1,000,000
-    Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000;
+  // Generate a random price between $100,000 and $1,000,000
+  const generateRandomPrice = () => Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000;
   const handleCalculateComp = (id) => {
     const randomPrice = generateRandomPrice();
     setAddresses(addresses.map(address => (address.id === id ? { ...address, showPrice: true, price: randomPrice } : address)));
@@ -53,4 +52,4 @@ const ComparableAnalysis = () => {
   );
 };
 
-export default ComparableAnalysis;
+export default ComparableAnalysisPage;
