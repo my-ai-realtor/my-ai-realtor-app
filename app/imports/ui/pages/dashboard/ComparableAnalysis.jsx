@@ -77,8 +77,8 @@ const ComparableAnalysisPage = () => {
     return () => clearInterval(intervalId);
   }, [addresses]);
 
-  const handleMakeOffer = () => {
-    setRedirectToOffer(true);
+  const handleMakeOffer = (predictedPrice) => {
+    setRedirectToOffer({ pathname: '/home/make-offer', state: { offerPrice: predictedPrice } });
   };
 
   const renderPredictedPrice = (predictedPrice) => {
@@ -89,7 +89,7 @@ const ComparableAnalysisPage = () => {
       return (
         <div style={{ display: 'inline-block', marginLeft: '10px' }}>
           <span>Predicted Price: ${predictedPrice}</span>
-          <button type="button" onClick={handleMakeOffer} style={{ marginLeft: '10px' }}>
+          <button type="button" onClick={() => handleMakeOffer(predictedPrice)} style={{ marginLeft: '10px' }}>
             Make Offer
           </button>
         </div>
@@ -99,7 +99,7 @@ const ComparableAnalysisPage = () => {
   };
 
   if (redirectToOffer) {
-    return <Navigate to="/home/make-offer" replace />;
+    return <Navigate to={redirectToOffer.pathname} state={redirectToOffer.state} replace />;
   }
 
   return (

@@ -1,7 +1,6 @@
-// /imports/ui/pages/dashboard/MakeOfferPage.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
-// Sample data for questions
 const questionsData = [
   { id: 1, question: 'What is your offer price?' },
   { id: 2, question: 'What is your preferred closing date?' },
@@ -9,17 +8,18 @@ const questionsData = [
 ];
 
 const MakeOfferPage = () => {
-  // State to hold user responses
-  const [responses, setResponses] = useState({});
+  const location = useLocation();
+  const offerPrice = location.state?.offerPrice || ''; // Access offerPrice from navigation state
 
-  // Handle response change
+  const [responses, setResponses] = useState({ 1: offerPrice });
+
   const handleResponseChange = (id, value) => {
     setResponses({ ...responses, [id]: value });
   };
 
-  // Handle Generate Offer button click
   const handleGenerateOffer = () => {
     // You can add any processing or API call here
+    console.log('Offer data:', responses); // Example log
   };
 
   return (
@@ -28,8 +28,9 @@ const MakeOfferPage = () => {
       <div>
         {questionsData.map((q) => (
           <div key={q.id} style={{ marginBottom: '15px' }}>
-            <label>{q.question}</label>
+            <label htmlFor={`question-${q.id}`}>{q.question}</label> {/* Add htmlFor attribute */}
             <input
+              id={`question-${q.id}`} // Add id attribute to match the label's htmlFor
               type="text"
               placeholder="Your answer"
               value={responses[q.id] || ''}
