@@ -6,22 +6,11 @@ export const dashboardConfig = {
   sections: [
     {
       id: 'escrowProcess',
-      title: 'Escrow Process',
+      title: 'Steps',
       navItems: [
-        { id: 'propertySearch', label: 'Property Search', path: 'property-search', component: _Blank },
-        { id: 'inspection', label: 'Inspection', path: 'inspection', component: _Blank },
-        { id: 'financing', label: 'Financing', path: 'financing', component: _Blank },
-        { id: 'closing', label: 'Closing', path: 'closing', component: _Blank },
-      ],
-    },
-
-    // TODO: This is demostration purposes for meetings. Delete when demo is complete
-    {
-      id: 'techDemo',
-      title: 'Tech Demo',
-      navItems: [
-        { id: 'chat', label: 'Chat', path: 'chat', component: Chat },
-        { id: 'data', label: 'Data', path: 'data', component: _Blank },
+        { id: 'step-1', label: '1. Add Address', path: 'add-address', component: _Blank },
+        { id: 'step-2', label: '2. Calculate Comp', path: 'calculate-comp', component: _Blank },
+        { id: 'step-3', label: '3. Make Offer', path: 'make-ffer', component: _Blank },
       ],
     },
   ],
