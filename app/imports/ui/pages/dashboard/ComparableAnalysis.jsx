@@ -1,36 +1,103 @@
-// /imports/ui/pages/dashboard/ComparableAnalysis.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
+import { Meteor } from 'meteor/meteor';
 
 const ComparableAnalysisPage = () => {
   const [addresses, setAddresses] = useState([
-    { id: 1, address: '', showPrice: false, price: null },
+    { id: 1, address: '', showForm: false, features: {}, predictedPrice: null, eventId: null },
   ]);
-
   const [redirectToOffer, setRedirectToOffer] = useState(false);
 
   const addAddress = () => {
     const newId = addresses.length + 1;
-    setAddresses([...addresses, { id: newId, address: '', showPrice: false, price: null }]);
+    setAddresses([...addresses, { id: newId, address: '', showForm: false, features: {}, predictedPrice: null, eventId: null }]);
   };
 
   const handleAddressChange = (id, value) => {
     setAddresses(addresses.map(address => (address.id === id ? { ...address, address: value } : address)));
   };
 
-  const generateRandomPrice = () => Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000;
-
-  const handleCalculateComp = (id) => {
-    const randomPrice = generateRandomPrice();
-    setAddresses(addresses.map(address => (address.id === id ? { ...address, showPrice: true, price: randomPrice } : address)));
+  const handleToggleFeaturesForm = (id) => {
+    setAddresses(addresses.map(address => (address.id === id ? { ...address, showForm: !address.showForm } : address)));
   };
 
-  // Set the redirect flag to true when the "Make Offer" button is clicked
+  const handleFeatureChange = (id, field, value) => {
+    setAddresses(addresses.map(address => (
+      address.id === id ? { ...address, features: { ...address.features, [field]: parseFloat(value) } } : address
+    )));
+  };
+
+  const handleCalculateComp = (id) => {
+    const address = addresses.find(addr => addr.id === id);
+
+    Meteor.call('calculateComparable', address.features, (error, result) => {
+      if (error) {
+        console.error(error);
+        alert('Failed to calculate comparable price');
+      } else if (result && result.status === 'in-progress') {
+        // Prediction in progress, save the eventId for polling
+        setAddresses(addresses.map(addr => (
+          addr.id === id ? { ...addr, predictedPrice: result, eventId: result.eventId } : addr
+        )));
+      } else if (result && result.status === 'complete') {
+        // Prediction is complete
+        setAddresses(addresses.map(addr => (
+          addr.id === id ? { ...addr, predictedPrice: result.predictedPrice, eventId: null } : addr
+        )));
+      } else {
+        console.error("Unexpected response format", result);
+        alert('Unexpected response format from the server');
+      }
+    });
+  };
+
+
+  useEffect(() => {
+    // Polling function to check for prediction completion
+    const pollPredictions = () => {
+      addresses.forEach((address) => {
+        if (address.eventId) {
+          Meteor.call('checkPredictionStatus', address.eventId, (error, result) => {
+            if (error) {
+              console.error(error);
+            } else if (result.status === 'complete') {
+              setAddresses(addresses.map(addr => (
+                addr.id === address.id ? { ...addr, predictedPrice: result.predictedPrice, eventId: null } : addr
+              )));
+            }
+          });
+        }
+      });
+    };
+
+    // Set up a polling interval
+    const intervalId = setInterval(pollPredictions, 5000); // Poll every 5 seconds
+
+    // Clear the interval on component unmount
+    return () => clearInterval(intervalId);
+  }, [addresses]);
+
   const handleMakeOffer = () => {
     setRedirectToOffer(true);
   };
 
-  // If redirectToOffer is true, navigate to the /make-offer page
+  const renderPredictedPrice = (predictedPrice) => {
+    if (predictedPrice != null) {
+      if (typeof predictedPrice === 'object' && predictedPrice.status === 'in-progress') {
+        return <span>{predictedPrice.message}</span>;
+      }
+      return (
+        <div style={{ display: 'inline-block', marginLeft: '10px' }}>
+          <span>Predicted Price: ${predictedPrice}</span>
+          <button type="button" onClick={handleMakeOffer} style={{ marginLeft: '10px' }}>
+            Make Offer
+          </button>
+        </div>
+      );
+    }
+    return null;
+  };
+
   if (redirectToOffer) {
     return <Navigate to="/home/make-offer" replace />;
   }
@@ -49,13 +116,67 @@ const ComparableAnalysisPage = () => {
                 onChange={(e) => handleAddressChange(address.id, e.target.value)}
                 style={{ marginRight: '10px' }}
               />
-              <button type="button" onClick={() => handleCalculateComp(address.id)}>Calculate Comp</button>
-              {address.showPrice && (
-                <div style={{ display: 'inline-block', marginLeft: '10px' }}>
-                  <span>Price: ${address.price.toLocaleString()}</span>
-                  <button type="button" onClick={handleMakeOffer} style={{ marginLeft: '10px' }}>Make Offer</button>
+              <button type="button" onClick={() => handleToggleFeaturesForm(address.id)}>
+                {address.showForm ? 'Hide Features' : 'Add Features'}
+              </button>
+              {address.showForm && (
+                <div style={{ marginTop: '10px' }}>
+                  <input
+                    type="number"
+                    placeholder="Site Area (sqft)"
+                    onChange={(e) => handleFeatureChange(address.id, 'Site_Area_sqft', e.target.value)}
+                  />
+                  <input
+                    type="number"
+                    placeholder="Actual Age (Years)"
+                    onChange={(e) => handleFeatureChange(address.id, 'Actual_Age_Years', e.target.value)}
+                  />
+                  <input
+                    type="number"
+                    placeholder="Total Rooms"
+                    onChange={(e) => handleFeatureChange(address.id, 'Total_Rooms', e.target.value)}
+                  />
+                  <input
+                    type="number"
+                    placeholder="Bedrooms"
+                    onChange={(e) => handleFeatureChange(address.id, 'Bedrooms', e.target.value)}
+                  />
+                  <input
+                    type="number"
+                    placeholder="Bathrooms"
+                    onChange={(e) => handleFeatureChange(address.id, 'Bathrooms', e.target.value)}
+                  />
+                  <input
+                    type="number"
+                    placeholder="Gross Living Area (sqft)"
+                    onChange={(e) => handleFeatureChange(address.id, 'Gross_Living_Area_sqft', e.target.value)}
+                  />
+                  <input
+                    type="number"
+                    placeholder="Design Style Code"
+                    onChange={(e) => handleFeatureChange(address.id, 'Design_Style_Code', e.target.value)}
+                  />
+                  <input
+                    type="number"
+                    placeholder="Condition Code"
+                    onChange={(e) => handleFeatureChange(address.id, 'Condition_Code', e.target.value)}
+                  />
+                  <input
+                    type="number"
+                    placeholder="Energy Efficient Code"
+                    onChange={(e) => handleFeatureChange(address.id, 'Energy_Efficient_Code', e.target.value)}
+                  />
+                  <input
+                    type="number"
+                    placeholder="Garage/Carport Code"
+                    onChange={(e) => handleFeatureChange(address.id, 'Garage_Carport_Code', e.target.value)}
+                  />
+                  <button type="button" onClick={() => handleCalculateComp(address.id)} style={{ marginTop: '10px' }}>
+                    Calculate Comp
+                  </button>
                 </div>
               )}
+              {renderPredictedPrice(address.predictedPrice)}
             </div>
           </li>
         ))}
