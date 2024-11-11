@@ -177,7 +177,7 @@ footer .social-icons a:hover {
 
 footer .text-center {
   text-align: center; /* Ensures text and icons are centered */
-} 
+}
 
 .footer-logo {
   width: 200px;
@@ -272,6 +272,49 @@ footer .text-center {
   overflow-x: hidden;
   height: 100vh;
 }
+
+/* Container for the vertical line */
+.sidebar {
+  position: relative;
+}
+
+/* Vertical line */
+.sidebar .vertical-line {
+  position: absolute;
+  left: 15px; /* Adjust as needed */
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: #d6e0f5; /* Light blue color for the line */
+  z-index: -1;
+}
+
+/* Style for each nav link */
+.sidebar .nav-link {
+  color: #6c757d; /* Neutral grey for non-active text */
+  background-color: transparent;
+  font-size: 1rem;
+  padding: 8px 0 8px 30px; /* Offset padding for the vertical line */
+  position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Active link styling */
+.sidebar .active-link {
+  background-color: #d6e0f5; /* Light blue background for active step */
+  color: #004085; /* Darker blue for active text */
+  font-weight: bold;
+  border-left: 4px solid #004085; /* Emphasize active step with left border */
+  padding-left: 26px; /* Adjust padding to align with border */
+}
+
+/* Divider for each step */
+.sidebar .nav-link + .nav-link {
+  margin-top: 4px;
+}
+
+
+
 
 /* Chat Assistant Styles */
 .chat-assistant-page {
