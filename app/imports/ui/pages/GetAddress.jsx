@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Table } from 'react-bootstrap';
 import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-bootstrap5';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
@@ -22,6 +22,12 @@ const GetAddress = () => (
             </Card.Body>
           </Card>
         </AutoForm>
+        <Button id="nextButton" style={{ backgroundColor: 'transparent' }}><a href="/compprice">Next</a></Button>
+        <Table striped bordered hover variant="light" style={{ border: '3px solid black' }}>
+          <thead>
+            <th>Address Input</th>
+          </thead>
+        </Table>
       </Col>
     </Row>
   </Container>
