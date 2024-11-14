@@ -1,33 +1,45 @@
 // /imports/ui/pages/dashboard/_Blank.jsx
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 // This component displays the details of the selected company in a single line
 const SelectedCompanyPage = ({ company, goBack }) => (
-  <div style={{ padding: "20px", maxWidth: "500px", margin: "0 auto", textAlign: "center" }}>
+  <div style={{ padding: '20px', maxWidth: '500px', margin: '0 auto', textAlign: 'center' }}>
     <h2>Company Details</h2>
     <p>
-      <strong>Name:</strong> {company.name}, 
-      <strong> Description:</strong> {company.description}, 
-      <strong> Email:</strong> {company.email}, 
+      <strong>Name:</strong> {company.name},
+      <strong> Description:</strong> {company.description},
+      <strong> Email:</strong> {company.email},
       <strong> Website:</strong> <a href={company.website} target="_blank" rel="noopener noreferrer">{company.website}</a>
     </p>
 
     {/* Back button to go back to the selection page */}
+    {/* eslint-disable-next-line react/button-has-type */}
     <button
       onClick={goBack}
       style={{
-        padding: "10px 20px",
-        backgroundColor: "#4CAF50",
-        color: "white",
-        border: "none",
-        cursor: "pointer",
-        marginTop: "20px"
+        padding: '10px 20px',
+        backgroundColor: '#4CAF50',
+        color: 'white',
+        border: 'none',
+        cursor: 'pointer',
+        marginTop: '20px',
       }}
     >
       Back
     </button>
   </div>
 );
+
+SelectedCompanyPage.propTypes = {
+  company: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    website: PropTypes.string.isRequired,
+  }).isRequired,
+  goBack: PropTypes.func.isRequired,
+};
 
 const OfferAcceptedPage = () => {
   const [selectedCompany, setSelectedCompany] = useState(null);
@@ -36,29 +48,29 @@ const OfferAcceptedPage = () => {
   // List of companies with their details
   const companies = [
     {
-      name: "First American Title - Aiea",
-      description: "First American Title – First American Title – First American Title",
-      email: "firstamericantitle@gmail.com",
-      website: "https://local.firstam.com/hi"
+      name: 'First American Title - Aiea',
+      description: 'First American Title – First American Title – First American Title',
+      email: 'firstamericantitle@gmail.com',
+      website: 'https://local.firstam.com/hi',
     },
     {
-      name: "Fidelity National Title & Escrow",
-      description: "FNT | Hawaii - Home",
-      email: "fidelitynationaltitle@gmail.com",
-      website: "https://www.fidelityhawaii.com/"
+      name: 'Fidelity National Title & Escrow',
+      description: 'FNT | Hawaii - Home',
+      email: 'fidelitynationaltitle@gmail.com',
+      website: 'https://www.fidelityhawaii.com/',
     },
     {
-      name: "Premier Title & Escrow",
-      description: "Title Company - Honolulu, Kapolei, Kaneohe HI | Premier Title & Escrow",
-      email: "premiertitle@gmail.com",
-      website: "https://premiertitlehawaii.com/"
+      name: 'Premier Title & Escrow',
+      description: 'Title Company - Honolulu, Kapolei, Kaneohe HI | Premier Title & Escrow',
+      email: 'premiertitle@gmail.com',
+      website: 'https://premiertitlehawaii.com/',
     },
     {
-      name: "Old Republic Title",
-      description: "Honolulu | Old Republic Title",
-      email: "oldrepublictitle@gmail.com",
-      website: "https://www.oldrepublictitle.com/hawaii/honolulu/"
-    }
+      name: 'Old Republic Title',
+      description: 'Honolulu | Old Republic Title',
+      email: 'oldrepublictitle@gmail.com',
+      website: 'https://www.oldrepublictitle.com/hawaii/honolulu/',
+    },
   ];
 
   const handleCompanySelect = (company) => {
@@ -78,51 +90,52 @@ const OfferAcceptedPage = () => {
   return (
     <div>
       {!showDetails ? (
-        <div style={{ padding: "20px", maxWidth: "500px", margin: "0 auto" }}>
+        <div style={{ padding: '20px', maxWidth: '500px', margin: '0 auto' }}>
           <h2>Congrats on Your Acceptance!</h2>
           <p>
             Next, you need to select an escrow company and email them with your offer form you filled out in the previous step.
           </p>
 
           {/* Search bar */}
-          <input 
-            type="text" 
-            placeholder="Search for an escrow company..." 
+          <input
+            type="text"
+            placeholder="Search for an escrow company..."
             style={{
-              padding: "8px",
-              marginBottom: "40px",
-              width: "80%",
-              display: "block",
-              margin: "0 auto"
+              padding: '8px',
+              marginBottom: '40px',
+              width: '80%',
+              display: 'block',
+              margin: '0 auto',
             }}
           />
 
           {/* Company buttons in 2x2 grid */}
-          <div 
+          <div
             style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "20px",
-              justifyItems: "center",
-              marginBottom: "30px"
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '20px',
+              justifyItems: 'center',
+              marginBottom: '30px',
             }}
           >
             {companies.map((company, index) => (
+              // eslint-disable-next-line react/button-has-type
               <button
                 key={index}
                 onClick={() => handleCompanySelect(company)}
                 style={{
-                  padding: "10px 20px",
-                  backgroundColor: selectedCompany === company ? "#ffeeba" : "#f0f0f0",
-                  border: "1px solid #ccc",
-                  cursor: "pointer",
-                  width: "180px",
-                  textAlign: "center",
-                  transition: "background-color 0.3s",
-                  boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
-                  ":hover": {
-                    backgroundColor: "#d4e6f1"
-                  }
+                  padding: '10px 20px',
+                  backgroundColor: selectedCompany === company ? '#ffeeba' : '#f0f0f0',
+                  border: '1px solid #ccc',
+                  cursor: 'pointer',
+                  width: '180px',
+                  textAlign: 'center',
+                  transition: 'background-color 0.3s',
+                  boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
+                  ':hover': {
+                    backgroundColor: '#d4e6f1',
+                  },
                 }}
               >
                 {company.name}
@@ -132,7 +145,7 @@ const OfferAcceptedPage = () => {
 
           {/* Display selected company details */}
           {selectedCompany && (
-            <div style={{ marginBottom: "20px", textAlign: "center" }}>
+            <div style={{ marginBottom: '20px', textAlign: 'center' }}>
               <h3>Selected Company</h3>
               <p><strong>Name:</strong> {selectedCompany.name}</p>
               <p><strong>Description:</strong> {selectedCompany.description}</p>
@@ -142,17 +155,18 @@ const OfferAcceptedPage = () => {
           )}
 
           {/* Next button */}
+          {/* eslint-disable-next-line react/button-has-type */}
           <button
             onClick={handleNext}
             disabled={!selectedCompany}
             style={{
-              padding: "10px 20px",
-              backgroundColor: selectedCompany ? "#4CAF50" : "#ccc",
-              color: "white",
-              border: "none",
-              cursor: selectedCompany ? "pointer" : "not-allowed",
-              display: "block",
-              margin: "0 auto"
+              padding: '10px 20px',
+              backgroundColor: selectedCompany ? '#4CAF50' : '#ccc',
+              color: 'white',
+              border: 'none',
+              cursor: selectedCompany ? 'pointer' : 'not-allowed',
+              display: 'block',
+              margin: '0 auto',
             }}
           >
             Next
