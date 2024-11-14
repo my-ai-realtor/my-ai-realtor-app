@@ -273,6 +273,72 @@ footer .text-center {
   height: 100vh;
 }
 
+/* FOR OFFER ACCEPTED PAGE STYLING */
+
+/* style.css */
+
+.offer-accepted-page {
+  padding: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.offer-accepted-page h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.offer-accepted-page p {
+  margin-bottom: 30px;
+  font-size: 1em;
+  color: #333;
+}
+
+.search-bar {
+  padding: 8px;
+  margin-bottom: 30px;
+  width: 80%;
+}
+
+.company-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  justify-items: center;
+  margin-bottom: 30px;
+}
+
+.company-button {
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  width: 180px;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.company-button.selected {
+  background-color: #ffeeba;
+}
+
+.next-button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+  transition: background-color 0.3s;
+}
+
+.next-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
 /* Container for the vertical line */
 .sidebar {
   position: relative;
