@@ -1,55 +1,37 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import Mustache from 'mustache';
-import markdownIt from 'markdown-it';
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
-
-const markdownTemplate = `
-# Real Estate Offer
-
-**Buyer Name:** {{ fullName }}
-**Contact Information:** {{ contactInfo }}
-**Seller Name:** {{ sellerName }}
-**Property Address:** {{ propertyAddress }}
-**Property Type:** {{ propertyType }}
-**Offer Price:** {{ offerPrice }}
-**Earnest Money Deposit:** {{ earnestMoney }}
-**Payment Method:** {{ paymentMethod }}
-**Contingencies:**
-- Financing Contingency: {{ financingContingency }}
-- Inspection Contingency: {{ inspectionContingency }}
-- Appraisal Contingency: {{ appraisalContingency }}
-**Desired Closing Date:** {{ closingDate }}
-**Possession Date:** {{ possessionDate }}
-**Additional Terms:**
-- **Requests:** {{ requests }}
-- **Included Items:** {{ includedItems }}
-**Escrow Company:** {{ escrowCompany }}
-`;
+import { Container, Form, Button, Card } from 'react-bootstrap';
 
 const questionsData = [
-  { id: 1, question: 'What is your full name?' },
-  { id: 2, question: 'What is your contact information (email/phone)?' },
-  { id: 3, question: 'What is the full name of the seller?' },
-  { id: 4, question: 'What is the property address?' },
-  { id: 5, question: 'What type of property are you offering on (e.g., single-family, condo)?' },
-  { id: 6, question: 'What is your offer price?' },
-  { id: 7, question: 'What is your earnest money deposit?' },
-  { id: 8, question: 'Are you paying with cash or financing the purchase?' },
-  { id: 9, question: 'Would you like to include a financing contingency?' },
-  { id: 10, question: 'Would you like to add an inspection contingency?' },
-  { id: 11, question: 'Would you like to include an appraisal contingency?' },
-  { id: 12, question: 'What is your desired closing date?' },
-  { id: 13, question: 'When would you like to take possession of the property?' },
-  { id: 14, question: 'Do you have any specific requests, such as repairs or concessions?' },
-  { id: 15, question: 'Are there any items you would like included with the property (e.g., appliances)?' },
-  { id: 16, question: 'Which escrow company would you prefer if the offer is accepted?' },
-  { id: 17, question: 'Is all of the information you’ve provided accurate?' },
+  { id: 1, question: 'What is your full name?', default: 'John Doe' },
+  { id: 2, question: 'What is your contact information (email/phone)?', default: 'john@example.com' },
+  { id: 3, question: 'What is the full name of the seller?', default: 'Jane Smith' },
+  { id: 4, question: 'What is the property address?', default: '123 Main St, City, Country' },
+  { id: 5, question: 'What type of property are you offering on (e.g., single-family, condo)?', default: 'Single-Family' },
+  { id: 6, question: 'What is your offer price?', default: '250000' },
+  { id: 7, question: 'What is your earnest money deposit?', default: '5000' },
+  { id: 8, question: 'Are you paying with cash or financing the purchase?', default: 'Financing' },
+  { id: 9, question: 'Would you like to include a financing contingency?', default: 'Yes' },
+  { id: 10, question: 'Would you like to add an inspection contingency?', default: 'Yes' },
+  { id: 11, question: 'Would you like to include an appraisal contingency?', default: 'Yes' },
+  { id: 12, question: 'What is your desired closing date?', default: '2023-12-31' },
+  { id: 13, question: 'When would you like to take possession of the property?', default: '2024-01-15' },
+  { id: 14, question: 'Do you have any specific requests, such as repairs or concessions?', default: 'None' },
+  { id: 15, question: 'Are there any items you would like included with the property (e.g., appliances)?', default: 'Appliances' },
+  { id: 16, question: 'Which escrow company would you prefer if the offer is accepted?', default: 'ABC Escrow' },
+  { id: 17, question: 'Is all of the information you’ve provided accurate?', default: 'Yes' },
 ];
 
 const MakeOfferPage = () => {
   const location = useLocation();
-  const [responses, setResponses] = useState({ 6: location?.state?.offerPrice || '' });
+  const [responses, setResponses] = useState(() => {
+    const initialResponses = {};
+    questionsData.forEach((q) => {
+      initialResponses[q.id] = q.id === 6 ? location?.state?.offerPrice || q.default : q.default;
+    });
+    return initialResponses;
+  });
   const [pdfUrl, setPdfUrl] = useState(null);
   const [buttonLabel, setButtonLabel] = useState('Generate Offer');
 
@@ -58,27 +40,6 @@ const MakeOfferPage = () => {
   };
 
   const handleGenerateOffer = async () => {
-    const filledMarkdown = Mustache.render(markdownTemplate, {
-      fullName: responses[1],
-      contactInfo: responses[2],
-      sellerName: responses[3],
-      propertyAddress: responses[4],
-      propertyType: responses[5],
-      offerPrice: responses[6],
-      earnestMoney: responses[7],
-      paymentMethod: responses[8],
-      financingContingency: responses[9],
-      inspectionContingency: responses[10],
-      appraisalContingency: responses[11],
-      closingDate: responses[12],
-      possessionDate: responses[13],
-      requests: responses[14],
-      includedItems: responses[15],
-      escrowCompany: responses[16],
-    });
-
-    const md = new markdownIt();
-    const textContent = md.render(filledMarkdown).replace(/<\/?[^>]+(>|$)/g, '');
 
     const pdfDoc = await PDFDocument.create();
     const page = pdfDoc.addPage([600, 800]);
@@ -118,7 +79,7 @@ const MakeOfferPage = () => {
     ];
 
     sections.forEach((section) => {
-      const value = section.key ? responses[section.key] : '';
+      const value = section.key ? String(responses[section.key] || '') : '';
       page.drawText(section.label, {
         x: 50,
         y: yPosition,
@@ -175,29 +136,29 @@ const MakeOfferPage = () => {
   };
 
   return (
-    <div>
+    <Container className="my-4">
       <h2>Make Offer</h2>
-      <div>
-        {questionsData.map((q) => (
-          <div key={q.id} style={{ marginBottom: '15px' }}>
-            <label htmlFor={`question-${q.id}`}>{q.question}</label>
-            <input
-              id={`question-${q.id}`}
-              type="text"
-              placeholder="Your answer"
-              value={responses[q.id] || ''}
-              onChange={(e) => handleResponseChange(q.id, e.target.value)}
-              style={{ marginLeft: '10px', width: '300px' }}
-            />
-          </div>
-        ))}
-      </div>
-      <button type="button" onClick={handleGenerateOffer} style={{ marginTop: '20px' }}>
-        {buttonLabel}
-      </button>
+      <Card className="p-4 mt-4">
+        <Form>
+          {questionsData.map((q) => (
+            <Form.Group key={q.id} className="mb-3">
+              <Form.Label>{q.question}</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Your answer"
+                value={responses[q.id] || ''}
+                onChange={(e) => handleResponseChange(q.id, e.target.value)}
+              />
+            </Form.Group>
+          ))}
+        </Form>
+        <Button variant="primary" onClick={handleGenerateOffer} className="mt-3">
+          {buttonLabel}
+        </Button>
+      </Card>
 
       {pdfUrl && (
-        <div style={{ marginTop: '20px', border: '1px solid #ddd', padding: '10px', borderRadius: '5px' }}>
+        <Card className="mt-4 p-3">
           <iframe
             src={pdfUrl}
             title="Generated Offer PDF"
@@ -205,9 +166,9 @@ const MakeOfferPage = () => {
             height="500px"
             style={{ border: 'none' }}
           />
-        </div>
+        </Card>
       )}
-    </div>
+    </Container>
   );
 };
 

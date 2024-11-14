@@ -1,5 +1,4 @@
 // /imports/ui/pages/dashboard/dashboardConfig.js
-import ChatPage from './Chat';
 import ComparableAnalysisPage from './ComparableAnalysis';
 import MakeOfferPage from './MakeOffer';
 import _Blank from './_Blank';
