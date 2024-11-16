@@ -47,9 +47,6 @@ const GetAddress = () => {
                 <th>Address</th>
               </tr>
             </thead>
-            <tbody>
-              <h6>Address should be in here</h6>
-            </tbody>
           </Table>
         </Col>
       </Row>
