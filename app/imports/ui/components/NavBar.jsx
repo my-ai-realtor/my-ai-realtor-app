@@ -15,7 +15,7 @@ const NavBar = () => {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand as={NavLink} to="/" id='nav-logo'>
+        <Navbar.Brand as={NavLink} to="/" id="nav-logo">
           <Image src="/images/my-ai-realtor-logo_1-removebg.png" fluid width="20%" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
