@@ -18,6 +18,7 @@ import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
 import GettingStarted from '../pages/GettingStarted';
 import Terms from '../pages/Terms';
+import GetAddress from '../pages/GetAddress';
 import { dashboardConfig } from '../pages/dashboard/dashboardConfig';
 
 // Create a component that redirects if authenticated
@@ -48,6 +49,11 @@ const App = () => {
           <Route path="/terms" element={<Terms />} />
           <Route path="/learnmore" element={<LearnMore />} />
           <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/step1" element={<GetAddress />} />
+          <Route path="/step2" element={<GetAddress />} />
+          <Route path="/step3" element={<GetAddress />} />
+          <Route path="/step4" element={<GetAddress />} />
+          <Route path="/step5" element={<GetAddress />} />
 
           {/* Dashboard Parent Route */}
           <Route
