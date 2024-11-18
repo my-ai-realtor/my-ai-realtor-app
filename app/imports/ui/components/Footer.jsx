@@ -19,7 +19,7 @@ const Footer = () => (
         <Col>
           <a href="/terms" className="footer-link-button mx-2">Terms of Service</a>
           <a href="/about" className="footer-link-button mx-2">About Us</a>
-          <a href="/faqs" className="footer-link-button mx-2">FAQs</a>
+          <a href="/learnmore" className="footer-link-button mx-2">FAQs</a>
         </Col>
       </Row>
       <Row className="text-center mt-3">
