@@ -3,7 +3,7 @@ import { Selector } from 'testcafe';
 class GettingStartedPage {
     /** Verify the Getting Started page is visible */
     async isPageVisible(testController) {
-        const header = Selector('h2').withText('Getting Started');
+        const header = Selector('.getting-started-container');
         await testController.expect(header.exists).ok('Getting Started page is not visible');
     }
 

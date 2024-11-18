@@ -3,7 +3,7 @@ import { Selector } from 'testcafe';
 class TermsPage {
     /** Verify the Terms page is visible */
     async isPageVisible(testController) {
-        const header = Selector('h1.terms-title').withText('Terms and Conditions');
+        const header = Selector('.terms-container');
         await testController.expect(header.exists).ok('Terms and Conditions page header is not visible');
     }
 

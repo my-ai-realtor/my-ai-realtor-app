@@ -1,5 +1,5 @@
 import { Selector } from 'testcafe';
-import { navBar } from './navbar.component';
+import { navBar } from './../components/navbar.component';
 
 class SigninPage {
   constructor() {
