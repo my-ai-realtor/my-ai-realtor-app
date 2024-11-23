@@ -1,4 +1,3 @@
-// /imports/ui/pages/dashboard/Dashboard.js
 import React from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { Col, Container, Row, Nav, Button, Offcanvas } from 'react-bootstrap';
@@ -8,11 +7,10 @@ import { dashboardConfig } from './dashboardConfig';
 
 const Dashboard = () => {
   const [showSidebar, setShowSidebar] = React.useState(false);
-  const location = useLocation(); // Get the current location
+  const location = useLocation();
 
   return (
     <Container id="dashboard-page" fluid>
-      {/* Sidebar Toggle Button for mobile */}
       <Button
         variant="primary"
         className="d-md-none mb-3"
@@ -21,7 +19,6 @@ const Dashboard = () => {
         Open Sidebar
       </Button>
 
-      {/* Offcanvas Sidebar for mobile view */}
       <Offcanvas
         show={showSidebar}
         onHide={() => setShowSidebar(false)}
@@ -40,7 +37,9 @@ const Dashboard = () => {
                     as={NavLink}
                     key={id}
                     to={`/home/${path}`}
-                    className="py-2 px-3 mb-2 bg-white rounded shadow-sm text-dark"
+                    className={
+                      location.pathname.includes(path) ? 'active-link py-2 px-3 mb-2 text-dark' : 'py-2 px-3 mb-2 text-dark'
+                    }
                     onClick={() => setShowSidebar(false)}
                   >
                     {label}
@@ -53,12 +52,8 @@ const Dashboard = () => {
       </Offcanvas>
 
       <Row className="h-100">
-        {/* Sidebar for desktop view */}
-        <Col
-          xs={12}
-          md={3}
-          className="sidebar bg-light p-3 d-none d-md-block"
-        >
+        <Col xs={12} md={3} className="sidebar bg-light p-3 d-none d-md-block">
+          <div className="vertical-line" /> {/* Vertical line */}
           {dashboardConfig.sections.map((section) => (
             <React.Fragment key={section.id}>
               <h4 className="mb-4">{section.title}</h4>
@@ -68,7 +63,9 @@ const Dashboard = () => {
                     as={NavLink}
                     key={id}
                     to={`/home/${path}`}
-                    className="py-2 px-3 mb-2 bg-white rounded shadow-sm text-dark"
+                    className={
+                      location.pathname.includes(path) ? 'active-link py-2 px-3 mb-2 text-dark' : 'py-2 px-3 mb-2 text-dark'
+                    }
                   >
                     {label}
                   </Nav.Link>
@@ -78,18 +75,11 @@ const Dashboard = () => {
           ))}
         </Col>
 
-        {/* Main Content Area */}
-        <Col
-          xs={12}
-          md={9}
-          className="content p-4"
-        >
-          {/* Render the matched child route component */}
+        <Col xs={12} md={9} className="content p-4">
           <Outlet />
         </Col>
       </Row>
 
-      {/* Conditionally render AIChatBox */}
       {!location.pathname.startsWith('/home/chat') && <AIChatBox />}
     </Container>
   );
