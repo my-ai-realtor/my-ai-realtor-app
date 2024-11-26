@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../../api/stuff/Stuff.js';
+import { Addresses } from '../../api/address/Address';
 
 /* eslint-disable no-console */
 
@@ -14,5 +15,17 @@ if (Stuffs.collection.find().count() === 0) {
   if (Meteor.settings.defaultData) {
     console.log('Creating default data.');
     Meteor.settings.defaultData.forEach(data => addData(data));
+  }
+}
+
+const addAddress = (data) => {
+  console.log(`  Adding: ${data.address} (${data.owner})`);
+  Addresses.collection.insert(data);
+};
+// Initialize the AddressesCollection if empty.
+if (Addresses.collection.find().count() === 0) {
+  if (Meteor.settings.defaultData) {
+    console.log('Creating default address.');
+    Meteor.settings.defaultData.forEach(data => addAddress(data));
   }
 }

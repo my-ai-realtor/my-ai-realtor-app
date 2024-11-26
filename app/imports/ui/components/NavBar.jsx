@@ -27,6 +27,11 @@ const NavBar = () => {
                 Home
               </Nav.Link>
             )}
+            {currentUser !== '' && (
+              <Nav.Link id="selection-nav" as={NavLink} to="/getting-started" key="3">
+                Selection
+              </Nav.Link>
+            )}
             <Nav.Link id="learn-more-nav" as={NavLink} to="/learnmore" key="1">Learn More</Nav.Link>
             <Nav.Link id="contact-us-nav" as={NavLink} to="/contactus" key="2">Contact Us</Nav.Link>
           </Nav>
