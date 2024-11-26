@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 import { NavLink } from 'react-router-dom';
@@ -7,6 +8,12 @@ import { Container, Nav, Navbar, NavDropdown, Image } from 'react-bootstrap';
 import { BoxArrowRight, PersonFill, PersonPlusFill } from 'react-bootstrap-icons';
 
 const NavBar = () => {
+  const [selectionLink, setSelectionLink] = useState('/'); // Default link, currently to home
+
+  const changeSelectionLink = (newLink) => {
+    setSelectionLink(newLink);
+  };
+
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { currentUser } = useTracker(() => ({
     currentUser: Meteor.user() ? Meteor.user().username : '',
@@ -27,8 +34,9 @@ const NavBar = () => {
                 Home
               </Nav.Link>
             )}
-            <Nav.Link id="learn-more-nav" as={NavLink} to="/learnmore" key="1">Learn More</Nav.Link>
-            <Nav.Link id="contact-us-nav" as={NavLink} to="/contactus" key="2">Contact Us</Nav.Link>
+            <Nav.Link id="selection-nav" as={NavLink} to={selectionLink} key="1">Selection</Nav.Link>
+            <Nav.Link id="learn-more-nav" as={NavLink} to="/learnmore" key="2">Learn More</Nav.Link>
+            <Nav.Link id="contact-us-nav" as={NavLink} to="/contactus" key="3">Contact Us</Nav.Link>
           </Nav>
           <Nav className="me-auto justify-content-start">
 
