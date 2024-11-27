@@ -12,27 +12,22 @@ const GettingStarted = () => (
         <ul className="getting-started-list">
           <li className="getting-started-list-item">
             <Link to="/step1" className="getting-started-link">
-              1. I know what house I want and need to come up with comp prices and an offer
+              1. I have homes I am interested in, I would like help evaluating them.
             </Link>
           </li>
           <li className="getting-started-list-item">
             <Link to="/step2" className="getting-started-link">
-              2. I know what house I want and just need help with the offer
+              2. I would like to make an offer or have a response to an offer on a home I’m interested in.
             </Link>
           </li>
           <li className="getting-started-list-item">
             <Link to="/step3" className="getting-started-link">
-              3. I got my offer on a house accepted already and need help with remaining steps
+              3. I have a purchase contract and I’d like help managing the escrow process
             </Link>
           </li>
           <li className="getting-started-list-item">
             <Link to="/step4" className="getting-started-link">
-              4. I got my offer rejected and need help with what to do next.
-            </Link>
-          </li>
-          <li className="getting-started-list-item">
-            <Link to="/step5" className="getting-started-link">
-              5. I have bought the home. I need help with what to do next.
+              4. I own the property, I’d like help with next steps
             </Link>
           </li>
         </ul>
