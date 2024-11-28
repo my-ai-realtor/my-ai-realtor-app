@@ -8,11 +8,6 @@ import { Container, Nav, Navbar, NavDropdown, Image } from 'react-bootstrap';
 import { BoxArrowRight, PersonFill, PersonPlusFill } from 'react-bootstrap-icons';
 
 const NavBar = () => {
-  const [selectionLink, setSelectionLink] = useState('/'); // Default link, currently to home
-
-  const changeSelectionLink = (newLink) => {
-    setSelectionLink(newLink);
-  };
 
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { currentUser } = useTracker(() => ({
@@ -34,7 +29,7 @@ const NavBar = () => {
                 Home
               </Nav.Link>
             )}
-            <Nav.Link id="selection-nav" as={NavLink} to={selectionLink} key="1">Selection</Nav.Link>
+            <Nav.Link id="selection-nav" as={NavLink} to="/selection" key="1">Selection</Nav.Link>
             <Nav.Link id="learn-more-nav" as={NavLink} to="/learnmore" key="2">Learn More</Nav.Link>
             <Nav.Link id="contact-us-nav" as={NavLink} to="/contactus" key="3">Contact Us</Nav.Link>
           </Nav>
