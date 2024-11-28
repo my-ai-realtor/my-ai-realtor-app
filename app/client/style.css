@@ -45,7 +45,7 @@ body .landing-page-bg .text-box {
 
 /* Custom header title styles */
 body .landing-page-bg .header-title {
-  font-size: 3rem;
+   font-size: 3rem;
   font-weight: 600;
   margin-bottom: 1rem;
 }
@@ -427,4 +427,34 @@ footer .text-center {
   font-size: 1em;
   color: #555;
   margin-bottom: 15px;
+}
+
+/*Selection Styles*/
+
+#progbar-container {
+  justify-content: center;
+}
+
+#selection-progbar {
+  padding: 40px;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.empty-button{ 
+  padding: 10px;
+  justify-content: left;
+  font-weight: bold;
+  background: none;          
+  border: none;              
+  cursor: pointer;           
+  font-family: inherit;      
+  font-size: 1.2rem;;        
+  outline: none;
+  text-decoration: underline;             
+}
+
+#prog-title{
+  justify-content: center;
 }
