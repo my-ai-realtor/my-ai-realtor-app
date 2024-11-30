@@ -242,6 +242,8 @@ footer .text-center {
   font-weight: 500;
   text-decoration: none;
   transition: color 0.3s ease, text-decoration 0.3s ease;
+  background: none;
+  border: none;         
 }
 
 .getting-started-link:hover {
