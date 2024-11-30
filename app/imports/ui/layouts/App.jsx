@@ -16,7 +16,6 @@ import LearnMore from '../pages/LearnMore';
 import ContactUs from '../pages/ContactUs';
 import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
-import GettingStarted from '../pages/GettingStarted';
 import Terms from '../pages/Terms';
 import Selection from '../pages/selection/Selection';
 import { dashboardConfig } from '../pages/dashboard/dashboardConfig';
@@ -24,7 +23,7 @@ import { dashboardConfig } from '../pages/dashboard/dashboardConfig';
 // Create a component that redirects if authenticated
 const LandingOrRedirect = () => {
   const isLoggedIn = Meteor.userId() !== null;
-  return isLoggedIn ? <Navigate to="/home" replace /> : <Landing />;
+  return isLoggedIn ? <Navigate to="/selection" replace /> : <Landing />;
 };
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
@@ -46,7 +45,6 @@ const App = () => {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signout" element={<SignOut />} />
-          <Route path="/getting-started" element={<GettingStarted />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/learnmore" element={<LearnMore />} />
           <Route path="/contactus" element={<ContactUs />} />
