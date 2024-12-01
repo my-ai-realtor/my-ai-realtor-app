@@ -1,7 +1,5 @@
 [![ci-meteor-application-template-react](https://github.com/ics-software-engineering/meteor-application-template-react/actions/workflows/ci.yml/badge.svg)](https://github.com/ics-software-engineering/meteor-application-template-react/actions/workflows/ci.yml)
 
-For detailed installation instructions, please see http://ics-software-engineering.github.io/meteor-application-template-react/
-
 # MyAIRealtor
 
 MyAIRealtor is a web application designed to empower home buyers throughout the real estate process. By leveraging generative AI, MyAIRealtor simplifies the complexities of purchasing a property, making the experience more transparent, efficient, and user-friendly.
@@ -73,6 +71,4 @@ By focusing on buyer empowerment and efficiency, MyAIRealtor aims to redefine ho
 - Basic knowledge of React and web development.
 
 ### Installation
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/your-username/MyAIRealtor.git
+1. For detailed installation instructions, please see http://ics-software-engineering.github.io/meteor-application-template-react/
