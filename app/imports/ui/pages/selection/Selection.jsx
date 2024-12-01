@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
 import GettingStarted from './GettingStarted';
 import SelectionOne from './SelectionOne';
-import SelectionTwo from './SelectionTwo';
+import SelectionTwo from './selectiontwo/SelectionTwo';
 import SelectionThree from './SelectionThree';
 import SelectionFour from './SelectionFour';
 
@@ -38,20 +38,22 @@ const Selection = () => {
 
   return (
     <Container className="py-3">
-      <Row>
-        <h2 id="prog-title">Progress</h2>
-      </Row>
-      <Row>
-        <progress value={selection / stepCount} id="selection-progbar" />
-      </Row>
-      <Row>
-        {Object.values(stepsButtons)}
-      </Row>
+      <Col id="gray-background">
+        <Row>
+          <h2 id="prog-title">Progress</h2>
+        </Row>
+        <Row>
+          <progress value={selection / stepCount} id="selection-progbar" />
+        </Row>
+        <Row>
+          {Object.values(stepsButtons)}
+        </Row>
+      </Col>
       <Row>
         {pages[selection]}
       </Row>
       <Row>
-        <button type="button" className="empty-button" onClick={() => setSelection(0)}>Back to the Beginning</button>
+        <button type="button" className="empty-button" onClick={() => setSelection(0)}>Start Over</button>
       </Row>
 
     </Container>
