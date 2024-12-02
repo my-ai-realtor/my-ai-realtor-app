@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Col, Row, Card } from 'react-bootstrap';
 
-const Finance = ({ setSelection }) => (
+const Finance = ({ setOffer }) => (
   <Container fluid className="gray-background my-4">
 
     <Row className="h-100">
@@ -58,13 +58,18 @@ const Finance = ({ setSelection }) => (
           </Card>
         </Col>
       </Col>
-      <button type="button" className="getting-started-link" onClick={() => setSelection(3)}>
+      <button
+        type="button"
+        className="getting-started-link"
+        onClick={() => setOffer(5)} // Navigate to Offer Dashboard
+      >
         Go to Offer Dashboard
       </button>
+
     </Row>
   </Container>
 );
 Finance.propTypes = {
-  setSelection: PropTypes.func.isRequired,
+  setOffer: PropTypes.func.isRequired,
 };
 export default Finance;

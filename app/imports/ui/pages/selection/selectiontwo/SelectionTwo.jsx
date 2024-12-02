@@ -6,6 +6,7 @@ import UploadOffer from './UploadOffer';
 import Initial from './Initial';
 import Finance from './Finance';
 import FinanceQuestions from './FinanceQuestions';
+import OfferDashboard from './OfferDashboard';
 
 const SelectionTwo = ({ setSelection }) => {
 
@@ -22,7 +23,8 @@ const SelectionTwo = ({ setSelection }) => {
   pages[1] = <UploadOffer setOffer={setOffer} />;
   pages[2] = <MakeOfferPage setOffer={setOffer} />;
   pages[3] = <FinanceQuestions setOffer={setOffer} />;
-  pages[4] = <Finance setSelection={setSelection} />;
+  pages[4] = <Finance setSelection={setSelection} setOffer={setOffer} />;
+  pages[5] = <OfferDashboard setOffer={setOffer} setSelection={setSelection} />;
 
   return (
     <Container className="py-3">
