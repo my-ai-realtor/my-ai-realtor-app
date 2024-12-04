@@ -3,6 +3,7 @@
 // /imports/ui/pages/dashboard/Interest.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ChatModule from '../../components/ChatModule';
 
 const SelectionOne = ({ setSelection }) => {
   const navigate = useNavigate();
@@ -159,6 +160,12 @@ const SelectionOne = ({ setSelection }) => {
         >
           + Add Home
         </button>
+      </div>
+
+
+      {/* Chat Module */}
+      <div style={{ flex: 1, borderLeft: '1px solid #ddd' }}>
+        <ChatModule />
       </div>
     </div>
   );
