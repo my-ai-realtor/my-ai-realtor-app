@@ -1,15 +1,12 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable no-console */
 // /imports/ui/pages/dashboard/Interest.jsx
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-const SelectionOne = ({ setSelection }) => {
-  const navigate = useNavigate();
+const InterestPage = () => {
   const [homes, setHomes] = useState([
     {
       id: 1,
-      address: '1234 Kapiolani Blvd, Honolulu, HI 96814',
+      address: 'Address 1',
       matchLevel: 'good',
       characteristics: ['has right size', 'has a yard', 'old'],
       daysOnMarket: 60,
@@ -18,7 +15,7 @@ const SelectionOne = ({ setSelection }) => {
     },
     {
       id: 2,
-      address: '5678 Ala Moana Blvd, Honolulu, HI 96815',
+      address: 'Address 2',
       matchLevel: 'average',
       characteristics: ['needs renovation', 'good location'],
       daysOnMarket: 45,
@@ -49,15 +46,8 @@ const SelectionOne = ({ setSelection }) => {
     setHomes([...homes, newHome]);
   };
 
-  const handleSubmit = (home) => {
-    setSelection((prev) => prev + 1);
-    console.log('Submitting home:', home);
-    navigate('/selection'); // Navigate to the desired page
-  };
-
-  const makeOffer = (home) => {
-    console.log(`Make offer button clicked for home ID: ${home.id}`);
-    handleSubmit(home);
+  const makeOffer = (homeId) => {
+    console.log(`Make offer button clicked for home ID: ${homeId}`);
   };
 
   return (
@@ -129,7 +119,7 @@ const SelectionOne = ({ setSelection }) => {
             </div>
             <button
               type="button"
-              onClick={() => makeOffer(home)}
+              onClick={() => makeOffer(home.id)}
               style={{
                 padding: '10px 20px',
                 backgroundColor: '#007BFF',
@@ -164,4 +154,4 @@ const SelectionOne = ({ setSelection }) => {
   );
 };
 
-export default SelectionOne;
+export default InterestPage;
