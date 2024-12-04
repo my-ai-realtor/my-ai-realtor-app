@@ -23,15 +23,9 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="justify-content-end" style={{ width: '100%' }}>
-            {/* Conditionally render "Home" link based on user login status */}
-            {currentUser !== '' && (
-              <Nav.Link id="home-nav" as={NavLink} to="/" key="0">
-                Home
-              </Nav.Link>
-            )}
-            <Nav.Link id="selection-nav" as={NavLink} to="/selection" key="1">Selection</Nav.Link>
-            <Nav.Link id="learn-more-nav" as={NavLink} to="/learnmore" key="2">Learn More</Nav.Link>
-            <Nav.Link id="contact-us-nav" as={NavLink} to="/contactus" key="3">Contact Us</Nav.Link>
+            <Nav.Link id="home-nav" as={NavLink} to="/" key="0">Home</Nav.Link>
+            <Nav.Link id="learn-more-nav" as={NavLink} to="/learnmore" key="1">Learn More</Nav.Link>
+            <Nav.Link id="contact-us-nav" as={NavLink} to="/contactus" key="2">Contact Us</Nav.Link>
           </Nav>
           <Nav className="me-auto justify-content-start">
 

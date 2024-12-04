@@ -21,7 +21,7 @@ const SelectionOne = ({ setSelection }) => {
   };
 
   return (
-    <Container className="py-3">
+    <Container fluid className="py-3">
       <Row className="justify-content-center">
         <Col xs={5}>
           <Col className="text-center"><h2>Please enter address you want to make offer</h2></Col>
