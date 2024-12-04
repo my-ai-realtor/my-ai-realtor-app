@@ -18,6 +18,7 @@ import NotAuthorized from '../pages/NotAuthorized';
 import LoadingSpinner from '../components/LoadingSpinner';
 import Terms from '../pages/Terms';
 import Selection from '../pages/selection/Selection';
+import ChatAssistantPage from '../pages/ChatAssistant';
 import { dashboardConfig } from '../pages/dashboard/dashboardConfig';
 
 // Create a component that redirects if authenticated
@@ -49,6 +50,7 @@ const App = () => {
           <Route path="/learnmore" element={<LearnMore />} />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/selection" element={<Selection />} />
+          <Route path="/chat" element={<ChatAssistantPage />} />
 
           {/* Dashboard Parent Route */}
           <Route

@@ -26,6 +26,7 @@ const NavBar = () => {
             <Nav.Link id="home-nav" as={NavLink} to="/" key="0">Home</Nav.Link>
             <Nav.Link id="learn-more-nav" as={NavLink} to="/learnmore" key="1">Learn More</Nav.Link>
             <Nav.Link id="contact-us-nav" as={NavLink} to="/contactus" key="2">Contact Us</Nav.Link>
+            <Nav.Link id="learn-more-nav" as={NavLink} to="/chat" key="1">Chat</Nav.Link>
           </Nav>
           <Nav className="me-auto justify-content-start">
 
