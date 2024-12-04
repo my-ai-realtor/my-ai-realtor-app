@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // /imports/ui/pages/dashboard/Interest.jsx
 import React, { useState } from 'react';
 
@@ -46,7 +47,7 @@ const InterestPage = () => {
   };
 
   const makeOffer = (homeId) => {
-    alert(`Make offer button clicked for home ID: ${homeId}`);
+    console.log(`Make offer button clicked for home ID: ${homeId}`);
   };
 
   return (
@@ -70,6 +71,7 @@ const InterestPage = () => {
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <strong style={{ fontSize: '18px' }}>{home.address}</strong>
                 <button
+                  type="button"
                   style={{
                     marginLeft: '10px',
                     fontSize: '18px',
