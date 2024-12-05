@@ -22,7 +22,6 @@ const Selection = () => {
   const [selection, setSelection] = useState(init);
   const location = useLocation();
 
-
   useEffect(() => {
     sessionStorage.setItem('selection', selection);
   });
