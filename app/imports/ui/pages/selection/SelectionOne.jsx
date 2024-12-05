@@ -3,19 +3,15 @@
 // /imports/ui/pages/dashboard/Interest.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ChatModule from '../../components/ChatModule';
+
 import { Meteor } from 'meteor/meteor';
 import {
   Button,
   Form,
-  InputGroup,
-  Container,
   Row,
   Col,
-  ListGroup,
   Card,
   Spinner,
-  Accordion,
 } from 'react-bootstrap';
 import {
   FaHome,
@@ -24,6 +20,7 @@ import {
   FaCar,
   FaRulerCombined,
 } from 'react-icons/fa';
+import ChatModule from '../../components/ChatModule';
 
 const SelectionOne = ({ setSelection }) => {
   const navigate = useNavigate();
@@ -128,7 +125,7 @@ const SelectionOne = ({ setSelection }) => {
 
   const makeComp = (home) => {
     console.log(`Comp button clicked for home ID: ${home.id}`);
-    setHomes(homes.map(h => h.id === home.id ? { ...h, showCompForm: !h.showCompForm } : h));
+    setHomes(homes.map(h => (h.id === home.id ? { ...h, showCompForm: !h.showCompForm } : h)));
   };
 
   const handleFeatureChange = (homeId, field, value) => {
@@ -141,9 +138,9 @@ const SelectionOne = ({ setSelection }) => {
             [field]: field.includes('_Code') ? parseInt(value, 10) : parseFloat(value),
           },
         };
-      } else {
-        return home;
       }
+      return home;
+
     }));
   };
 
@@ -154,9 +151,9 @@ const SelectionOne = ({ setSelection }) => {
         console.error(error);
         alert('Failed to calculate comparable price');
       } else if (result && result.status === 'in-progress') {
-        setHomes(homes.map(h => h.id === homeId ? { ...h, predictedPrice: result, eventId: result.eventId } : h));
+        setHomes(homes.map(h => (h.id === homeId ? { ...h, predictedPrice: result, eventId: result.eventId } : h)));
       } else if (result && result.status === 'complete') {
-        setHomes(homes.map(h => h.id === homeId ? { ...h, predictedPrice: result.predictedPrice, eventId: null } : h));
+        setHomes(homes.map(h => (h.id === homeId ? { ...h, predictedPrice: result.predictedPrice, eventId: null } : h)));
       } else {
         console.error('Unexpected response format', result);
         alert('Unexpected response format from the server');
@@ -172,7 +169,7 @@ const SelectionOne = ({ setSelection }) => {
             if (error) {
               console.error(error);
             } else if (result.status === 'complete') {
-              setHomes(homes.map(h => h.id === home.id ? { ...h, predictedPrice: result.predictedPrice, eventId: null } : h));
+              setHomes(homes.map(h => (h.id === home.id ? { ...h, predictedPrice: result.predictedPrice, eventId: null } : h)));
             }
           });
         }
@@ -406,13 +403,11 @@ const SelectionOne = ({ setSelection }) => {
                             {feature.type === 'select' ? (
                               <Form.Select
                                 value={home.features[featureKey]}
-                                onChange={(e) =>
-                                  handleFeatureChange(
-                                    home.id,
-                                    featureKey,
-                                    e.target.value
-                                  )
-                                }
+                                onChange={(e) => handleFeatureChange(
+                                  home.id,
+                                  featureKey,
+                                  e.target.value,
+                                )}
                               >
                                 {feature.options.map((option) => (
                                   <option key={option.value} value={option.value}>
@@ -425,13 +420,11 @@ const SelectionOne = ({ setSelection }) => {
                                 type={feature.type}
                                 placeholder={feature.placeholder}
                                 value={home.features[featureKey]}
-                                onChange={(e) =>
-                                  handleFeatureChange(
-                                    home.id,
-                                    featureKey,
-                                    e.target.value
-                                  )
-                                }
+                                onChange={(e) => handleFeatureChange(
+                                  home.id,
+                                  featureKey,
+                                  e.target.value,
+                                )}
                               />
                             )}
                           </Form.Group>
