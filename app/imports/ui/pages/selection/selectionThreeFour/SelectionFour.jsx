@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const SelectionFour = ({ setSelection }) => (
   <>
-    <h1>selection 4 pg</h1>
+    <h1 className="text-center">Congrats! You Are Done!</h1>
     <button
       type="button"
       className="empty-button"

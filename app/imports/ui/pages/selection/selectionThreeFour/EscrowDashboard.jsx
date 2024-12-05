@@ -8,7 +8,7 @@ const EscrowDashboard = ({ setEscrow, setSelection }) => (
     <h1 className="text-center">Escrow Dashboard</h1>
     <Accordion defaultActiveKey="0">
       <Accordion.Item eventKey="0">
-        <Accordion.Header>Expandable Table with Symbols</Accordion.Header>
+        <Accordion.Header>Your Escrow Real Estate Timeline</Accordion.Header>
         <Accordion.Body>
           {/* Symbols Section */}
           <div className="mb-3">
@@ -28,32 +28,50 @@ const EscrowDashboard = ({ setEscrow, setSelection }) => (
           {/* Table Section */}
           <Table striped bordered hover>
             <thead>
-            <tr>
-              <th>#</th>
-              <th>First Name</th>
-              <th>Status</th>
-              <th>Username</th>
-            </tr>
+              <tr>
+                <th>#</th>
+                <th>Milestone</th>
+                <th>Status</th>
+                <th>Deadline</th>
+              </tr>
             </thead>
             <tbody>
-            <tr>
-              <td>1</td>
-              <td>Mark</td>
-              <td><span className="text-success">✔ Completed</span></td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Jacob</td>
-              <td><span className="text-primary">⏳ In Progress</span></td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Larry</td>
-              <td><span className="text-danger">⚠ Action Needed</span></td>
-              <td>@twitter</td>
-            </tr>
+              <tr>
+                <td>1</td>
+                <td>Selection Phase</td>
+                <td><span className="text-success">✔ Completed</span></td>
+                <td>N/A</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Offer Preparation</td>
+                <td><span className="text-success">✔ Completed</span></td>
+                <td>N/A</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Offer Submission</td>
+                <td><span className="text-primary me-2">⏳ In Progress</span></td>
+                <td>November 20</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Inspection Scheduling</td>
+                <td><span className="text-danger me-2">⚠ Action Needed</span></td>
+                <td>Schedule by November 28</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Escrow Initiated</td>
+                <td><span className="text-primary me-2">⏳ In Progress</span></td>
+                <td>Starts November 30</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Closing Documents Signed</td>
+                <td><span className="text-primary me-2">⏳ In Progress</span></td>
+                <td>Due December 15</td>
+              </tr>
             </tbody>
           </Table>
         </Accordion.Body>
@@ -63,14 +81,14 @@ const EscrowDashboard = ({ setEscrow, setSelection }) => (
     <Accordion>
       <Accordion.Header>Upcoming Events</Accordion.Header>
       <Accordion.Body>
-      <br />
-      Offer Submission (Expires in 3 days)
-      <br />
-      Inspection Scheduling (Schedule by Nov 28)
-      <br />
-      Escrow Initiated (Starts Nov 30)
-      <br />
-      Closing Documents Signed (Due Dec 15)
+        <br />
+        Offer Submission (Expires in 3 days)
+        <br />
+        Inspection Scheduling (Schedule by Nov 28)
+        <br />
+        Escrow Initiated (Starts Nov 30)
+        <br />
+        Closing Documents Signed (Due Dec 15)
       </Accordion.Body>
     </Accordion>
     <Accordion>
