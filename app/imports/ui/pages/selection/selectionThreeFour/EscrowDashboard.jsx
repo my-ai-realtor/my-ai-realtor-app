@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Container, Accordion, Table } from 'react-bootstrap';
+import { Button, Container, Accordion, Table, AccordionBody } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const EscrowDashboard = ({ setEscrow, setSelection }) => (
@@ -59,6 +59,27 @@ const EscrowDashboard = ({ setEscrow, setSelection }) => (
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>
+
+    <Accordion>
+      <Accordion.Header>Upcoming Events</Accordion.Header>
+      <Accordion.Body>
+      <br />
+      Offer Submission (Expires in 3 days)
+      <br />
+      Inspection Scheduling (Schedule by Nov 28)
+      <br />
+      Escrow Initiated (Starts Nov 30)
+      <br />
+      Closing Documents Signed (Due Dec 15)
+      </Accordion.Body>
+    </Accordion>
+    <Accordion>
+      <Accordion.Header>Issues</Accordion.Header>
+      <AccordionBody>
+        None
+      </AccordionBody>
+    </Accordion>
+    <br />
     <Button type="button" onClick={() => setEscrow(0)} className="getting-started-link">Back</Button>
     {'                    '}
     <Button type="button" onClick={() => setSelection(4)} className="getting-started-link">Next</Button>
