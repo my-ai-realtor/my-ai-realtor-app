@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Row, Button } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import EscrowDashboard from './EscrowDashboard';
 import QuestionsSelectionThree from './QuestionsSelectionThree';
 
@@ -24,9 +24,6 @@ const SelectionThree = ({ setSelection }) => {
     <Container className="py-3">
       <Row>
         {eDashboard[escrow]}
-      </Row>
-      <Row>
-        <Button type="button" onClick={() => setEscrow(0)} className="getting-started-link">Next</Button>
       </Row>
     </Container>
   );
