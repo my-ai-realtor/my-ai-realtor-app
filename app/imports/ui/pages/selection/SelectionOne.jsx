@@ -62,8 +62,7 @@ const SelectionOne = ({ setSelection }) => {
   };
 
   const makeComp = (home) => {
-    console.log(`Make offer button clicked for home ID: ${home.id}`);
-    handleSubmit(home);
+    console.log(`Comp button clicked for home ID: ${home.id}`);
   };
 
   return (
@@ -181,7 +180,6 @@ const SelectionOne = ({ setSelection }) => {
           + Add Home
         </button>
       </div>
-
 
       {/* Chat Module */}
       <div style={{ flex: 1, borderLeft: '1px solid #ddd' }}>
