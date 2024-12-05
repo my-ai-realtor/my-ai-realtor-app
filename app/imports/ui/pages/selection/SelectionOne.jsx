@@ -61,6 +61,11 @@ const SelectionOne = ({ setSelection }) => {
     handleSubmit(home);
   };
 
+  const makeComp = (home) => {
+    console.log(`Make offer button clicked for home ID: ${home.id}`);
+    handleSubmit(home);
+  };
+
   return (
     <div style={{ padding: '20px' }}>
       <h2>Homes of Interest</h2>
@@ -142,6 +147,21 @@ const SelectionOne = ({ setSelection }) => {
               }}
             >
               Make Offer
+            </button>
+            <button
+              type="button"
+              onClick={() => makeComp(home)}
+              style={{
+                padding: '10px 20px',
+                backgroundColor: '#007BFF',
+                color: '#FFF',
+                border: 'none',
+                borderRadius: '5px',
+                cursor: 'pointer',
+                alignSelf: 'flex-start',
+              }}
+            >
+              Comp Prices
             </button>
           </div>
         ))}
