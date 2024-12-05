@@ -140,7 +140,6 @@ const SelectionOne = ({ setSelection }) => {
         };
       }
       return home;
-
     }));
   };
 
@@ -288,7 +287,33 @@ const SelectionOne = ({ setSelection }) => {
 
   return (
     <div style={{ padding: '20px' }}>
-      <h2>Homes of Interest</h2>
+      {/* Header Section */}
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: '20px',
+        }}
+      >
+        <h2>Homes of Interest</h2>
+        <button
+          type="button"
+          onClick={addHome}
+          style={{
+            padding: '10px 20px',
+            backgroundColor: '#28A745',
+            color: '#FFF',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+          }}
+        >
+          + Add Home
+        </button>
+      </div>
+
+      {/* List of Homes */}
       <div>
         {homes.map((home) => (
           <div
@@ -446,21 +471,6 @@ const SelectionOne = ({ setSelection }) => {
             )}
           </div>
         ))}
-        <button
-          type="button"
-          onClick={addHome}
-          style={{
-            marginTop: '10px',
-            padding: '10px 20px',
-            backgroundColor: '#28A745',
-            color: '#FFF',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer',
-          }}
-        >
-          + Add Home
-        </button>
       </div>
 
       {/* Chat Module */}
