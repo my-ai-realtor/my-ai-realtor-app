@@ -127,7 +127,7 @@ const ChatBox = ({ fullPage = false }) => {
               justifyContent: 'space-between',
             }}
           >
-            <div>Chat Assistant</div>
+            <div>My AI Realtor</div>
           </div>
 
           {/* Messages */}
