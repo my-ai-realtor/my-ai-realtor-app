@@ -4,8 +4,8 @@ import { Container, Col, Row } from 'react-bootstrap';
 import GettingStarted from './GettingStarted';
 import SelectionOne from './SelectionOne';
 import SelectionTwo from './selectiontwo/SelectionTwo';
-import SelectionThree from './SelectionThree';
-import SelectionFour from './SelectionFour';
+import SelectionThree from './selectionThreeFour/SelectionThree';
+import SelectionFour from './selectionThreeFour/SelectionFour';
 import AIChatBox from '../../components/AIChatBox';
 
 const Selection = () => {
@@ -15,7 +15,7 @@ const Selection = () => {
   titles[1] = 'Interest';
   titles[2] = 'Offer';
   titles[3] = 'Escrow';
-  titles[4] = 'Interest';
+  titles[4] = 'Close';
   const stepCount = 5;
   const saved = sessionStorage.getItem('selection');
   const init = (saved !== null ? parseInt(saved, 10) : 0);
