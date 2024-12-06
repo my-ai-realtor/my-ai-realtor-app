@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Container, Col, Row } from 'react-bootstrap';
 import GettingStarted from './GettingStarted';
 import SelectionOne from './SelectionOne';
 import SelectionTwo from './selectiontwo/SelectionTwo';
-import SelectionThree from './SelectionThree';
-import SelectionFour from './SelectionFour';
+import SelectionThree from './selectionThreeFour/SelectionThree';
+import SelectionFour from './selectionThreeFour/SelectionFour';
+import AIChatBox from '../../components/AIChatBox';
 
 const Selection = () => {
   const pages = {};
@@ -13,11 +15,13 @@ const Selection = () => {
   titles[1] = 'Interest';
   titles[2] = 'Offer';
   titles[3] = 'Escrow';
-  titles[4] = 'Interest';
+  titles[4] = 'Close';
   const stepCount = 5;
   const saved = sessionStorage.getItem('selection');
   const init = (saved !== null ? parseInt(saved, 10) : 0);
   const [selection, setSelection] = useState(init);
+  const location = useLocation();
+
   useEffect(() => {
     sessionStorage.setItem('selection', selection);
   });
@@ -56,6 +60,7 @@ const Selection = () => {
         <button type="button" className="empty-button" onClick={() => setSelection(0)}>Start Over</button>
       </Row>
 
+      {!location.pathname.startsWith('/chat') && <AIChatBox />}
     </Container>
   );
 };

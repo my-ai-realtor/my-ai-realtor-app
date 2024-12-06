@@ -2,7 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const SelectionFour = ({ setSelection }) => (
-  <button type="button" className="empty-button" onClick={() => setSelection(0)}>Next</button>
+  <>
+    <h1 className="text-center">Congrats! You Are Done!</h1>
+    <button
+      type="button"
+      className="empty-button"
+      onClick={() => setSelection(0)}
+    >
+      Next
+    </button>
+  </>
 );
 
 SelectionFour.propTypes = {
