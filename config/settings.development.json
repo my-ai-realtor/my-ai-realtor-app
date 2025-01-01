@@ -12,10 +12,18 @@
   ],
 
   "public": {
-    "featureFlags": {
-      "enableChatGPT": true,
-      "enableLLAMA": false,
-      "enableGPT4": false
+    "modelMap": {
+      "GPT35": "gpt-3.5-turbo",
+      "GPT4": "gpt-4",
+      "Llama2": "meta-llama/Llama-2-7b-chat-hf",
+      "Falcon": "tiiuae/falcon-7b-instruct",
+      "Llama32": "meta-llama/Llama-3.2-1B-Instruct"
     }
+  },
+
+  "private": {
+    "openaiApiKey": "yourAPIKeyHere",
+    "huggingFaceApiKey": "yourAPIKeyHere"
   }
+
 }
