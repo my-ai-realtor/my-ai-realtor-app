@@ -175,6 +175,10 @@ The application includes support for Large Language Model (LLM) integrations, re
 
 As part of the **MyAIRealtor** platform, we designed and engineered a custom large language model, **My-AI-Realtor**, based on Llama-3.2B. This model is fine-tuned specifically for real estate conversations and tailored to enhance the user experience on the platform.
 
+For future research direction, the goal is to scale the conversational dataset while integrating it interactively with the web application. A portion of the dataset will focus on user navigation within the web application, including its structure and functionality. Technically, this process is called contextual user guidance modeling or task-specific data annotation. This ensures the model is adept at assisting users in navigating and understanding the application seamlessly, as part of AI possibilities for MyAIRealtor.
+
+
+
 - **Model Deployment**: The model is hosted on Hugging Face at [My-AI-Realtor Model](https://huggingface.co/caslabs/my-ai-realtor). Developers can:
   - Utilize their Hugging Face account to deploy the model through Hugging Face services.
   - Use the "Use this model" option to download and run the model locally cost-free using Hugging Face tools.
