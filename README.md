@@ -116,8 +116,6 @@ We assume developers have completed **ICS 314 - Software Engineering**, as the c
 
 The AI services are modularized in the application's design, meaning they are not required for the application to run fully. Developers can explore and enable AI functionalities as needed, without affecting the core functionality of the application. This design ensures flexibility and scalability while supporting developers who wish to experiment with or extend the AI capabilities.
 
-Here’s the revised and expanded **Large Language Model Integration** section with your added information included in a professional and organized manner:
-
 ---
 
 #### **Large Language Model Integration**
